@@ -138,9 +138,10 @@
 			}
 			
 			function show_error() {
-				if ( can_show_error )
+				if ( can_show_error ) {
 					$('#type_area').css('background-color', '#ff7878')
 					setTimeout(hide_error, 500)
+				}
 				
 				can_show_error = false
 			}
