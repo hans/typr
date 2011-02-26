@@ -133,6 +133,7 @@
 			}
 			
 			function done() {
+				clearInterval(poll)
 				$('#type_area').css('background-color', '#6fbf4d')
 			}
 			
@@ -157,7 +158,7 @@
 					check_queue.push(event.keyCode)
 				})
 				
-				setInterval(eval_next_in_queue, 100)
+				poll = setInterval(eval_next_in_queue, 100)
 			})
 		</script>
 		<title>typr</title>
