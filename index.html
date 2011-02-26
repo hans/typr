@@ -100,7 +100,7 @@
 				var check = cur_word.substr(0, typed_text.length)
 				
 				if ( code == 32 ) // spacebar
-					if ( typed_text == check )
+					if ( typed_text.length == cur_word.length && typed_text == check )
 						next_word()
 					else
 						show_error()
