@@ -98,7 +98,7 @@
 			}
 			
 			function eval_next_in_queue() {
-				if ( check_queue.size == 0 ) return;
+				if ( check_queue.length == 0 ) return;
 				
 				var code = check_queue.shift()
 				var typed_text = $('#type_area').val().split(' ')[0]
