@@ -46,6 +46,7 @@
 				margin: 20px auto;
 				font-family: 'DejaVu Serif', 'Times New Roman', serif;
 				text-align: center;
+				display: none;
 			}
 			
 			table#results td {
@@ -79,6 +80,10 @@
 			// prevent continuous flashing when a typing error occurs
 			// (since the polling function would keep noticing the error until it was fixed)
 			can_show_error = true
+			
+			// track start time and end time for calculating stats
+			start_time = null
+			end_time = null
 			
 			// convert plain-text copy to something we can highlight more easily
 			function prepare_copy() {
@@ -133,8 +138,22 @@
 			}
 			
 			function done() {
+				end_time = new Date()
 				clearInterval(poll)
 				$('#type_area').css('background-color', '#6fbf4d')
+				
+				calculate_stats()
+				$('#results').show()
+			}
+			
+			function calculate_stats() {
+				delta = ( end_time.getTime() - start_time.getTime() ) / 60000
+				
+				words_per_minute = words.length / delta
+				characters_per_minute = $('#copy').text().length / delta
+				
+				$('#results-wpm').text(Math.round(words_per_minute))
+				$('#results-cpm').text(Math.round(characters_per_minute))
 			}
 			
 			function show_error() {
@@ -156,6 +175,8 @@
 				
 				$('#type_area').keyup(function(event) {
 					can_show_error = true
+					if ( start_time == null ) start_time = new Date()
+					
 					check_queue.push(event.keyCode)
 				})
 				
@@ -170,8 +191,8 @@
 			<input type="text" name="type_area" id="type_area" value="">
 			<table id="results">
 				<tr>
-					<td id="results-wpm">68</td>
-					<td id="results-cpm">439</td>
+					<td id="results-wpm">0</td>
+					<td id="results-cpm">0</td>
 				</tr>
 				<tr>
 					<th><abbr title="Words per minute">wpm</abbr></th>
