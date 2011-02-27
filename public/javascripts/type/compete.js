@@ -65,7 +65,7 @@ function update_player_stats(players) {
 // add a row into the stats table for a given player
 function add_player_row(cur_player_id, player) {
 	$('table.stats').append('<tr id="player-' + cur_player_id + '"><td>' + player.name + '</td><td></td><td>' + player.wpm + '</td><td>' + player.cpm + '</td></tr>')
-	$($('table.stats tr#player-' + idx + ' td')[1]).progressbar();
+	$($('table.stats tr#player-' + cur_player_id + ' td')[1]).progressbar();
 }
 
 // update a certain player's progress bar and stats
