@@ -109,7 +109,6 @@ function done() {
 	
 	calculate_stats()
 	submit_results(words.length, stat_delta, stat_wpm, stat_cpm)
-	$('#results').show()
 }
 
 function calculate_stats() {
