@@ -71,7 +71,7 @@ function poll_server() {
 		player_name: player_name,
 		wpm: stat_wpm,
 		cpm: stat_cpm,
-		done: done
+		done: is_done
 	}, function(data) {
 		console.log(data)
 	}, 'json')

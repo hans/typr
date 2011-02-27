@@ -34,7 +34,7 @@ type_area = null
 stat_delta = null
 stat_wpm = null
 stat_cpm = null
-done = false
+is_done = false
 
 // more stats
 words_typed = 0
@@ -99,7 +99,7 @@ function next_word() {
 }
 
 function done() {
-	done = true
+	is_done = true
 	
 	end_time = new Date()
 	clearInterval(poll)
