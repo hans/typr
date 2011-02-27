@@ -86,8 +86,9 @@ function show_countdown(time_left) {
 }
 
 function highlight_leader() {
-	sorted_players = room.players.sort(function(a, b) {
-		a.cur_word_idx - b.cur_word_idx
+	sorted_players = $.keys(room.players)
+	sorted_players = sorted_players.sort(function(a, b) {
+		return room.players[a].cur_word_idx - room.players[b].cur_word_idx
 	})
 	console.log(sorted_players)
 }
