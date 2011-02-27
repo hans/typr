@@ -1,6 +1,41 @@
 # coding: utf-8
 
 class TypeController < ApplicationController
+  def compete
+    @page_scripts = ['type']
+  end
+  
+  respond_to :json
+  def find_room
+    room_id = REDIS.srandmember 'rooms:open'
+    
+    if room_id.nil?
+      room_id = Time.now.to_i
+      REDIS.sadd 'rooms:open', room_id
+    else
+      room_wait = REDIS.get "rooms:id:#{room_id}:wait"
+    end
+    
+    # add the user to the retrieved room
+    REDIS.hset "rooms:id:#{room_id}", current_user.id, current_user.email + ":0:0"
+    
+    render :json => {'id' => room_id, 'players' => get_players(room_id)}
+  end
+  
+  respond_to :json
+  def room_status
+    room_id = params[:id]
+    render :json => {'id' => room_id, 'players' => get_players(room_id)}
+  end
+  
+  respond_to :json
+  def update_player_status
+    data_str = [params[:name], params[:wpm], params[:cpm], params[:done]].join ':'
+    REDIS.hset "rooms:id:#{params[:room_id]}", params[:player_id], data_str
+    
+    render :json => {'id' => room_id, 'players' => get_players(room_id)}
+  end
+  
   def practice
     @page_scripts = ['type']
   end
@@ -25,5 +60,13 @@ class TypeController < ApplicationController
   
   def record_url something
     ""
+  end
+  
+  private
+  def get_players room_id
+    REDIS.hgetall('rooms:id:' + room_id).map do |player_id, player_data_str|
+      player_data = player_data_str.split ':'
+      {'name': player_data[0], 'wpm': player_data[1], 'cpm': player_data[2], 'done': player_data[3]}
+    end
   end
 end

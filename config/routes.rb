@@ -52,6 +52,11 @@ Typr::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => "home#index"
   
+  match "/type/compete" => "type#compete"
+  match "/type/compete/room/find" => "type#find_room"
+  match "/type/compete/room/:id" => "type#room_status"
+  match "/type/compete/room/:room_id/:player_id/:name,:wpm,:cpm,:done" => "type#update_player_status"
+  
   match "/type/copy/:category" => "type#copy"
   match "/type/practice" => "type#practice"
   match "/type/submit" => "type#submit"
