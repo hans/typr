@@ -15,6 +15,6 @@ function add_key_listener() {
 function find_room() {
 	$.get('/type/compete/room/find', null, function(_room) {
 		room = _room;
-		prepare_copy(room['copy'][0], room['copy'][1])
+		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
 	}, 'json')
 }
