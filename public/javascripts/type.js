@@ -102,7 +102,6 @@ function done() {
 	is_done = true
 	
 	clearInterval(poll)
-	if ( server_poll != undefined ) clearInterval(server_poll)
 	
 	end_time = new Date()
 	type_area.css('background-color', '#6fbf4d')
