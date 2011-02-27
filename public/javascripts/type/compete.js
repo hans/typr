@@ -40,7 +40,6 @@ function find_room() {
 
 function start() {
 	$.get('/type/compete/room/' + room.id + '/start', null, function(data) {
-		console.log(data)
 		start_time = new Date()
 		add_key_listener()
 	})
@@ -109,7 +108,6 @@ function poll_server() {
 		progress: stat_progress,
 		done: is_done
 	}, function(data) {
-		console.log(data.players)
 		update_player_stats(data.players)
 	}, 'json')
 }
