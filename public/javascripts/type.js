@@ -30,6 +30,12 @@ end_time = null
 // set @ $(document).ready()
 type_area = null
 
+// stats
+stat_delta = null
+stat_wpm = null
+stat_cpm = null
+done = false
+
 function prepare_copy(words, note) {
 	$.each(words, function(idx, word) {
 		$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
@@ -82,24 +88,25 @@ function next_word() {
 }
 
 function done() {
+	done = true
+	
 	end_time = new Date()
 	clearInterval(poll)
 	type_area.css('background-color', '#6fbf4d')
 	
 	calculate_stats()
+	submit_results(words.length, stat_delta, stat_wpm, stat_cpm)
 	$('#results').show()
 }
 
 function calculate_stats() {
-	delta = ( end_time.getTime() - start_time.getTime() ) / 60000
+	stat_delta = ( end_time.getTime() - start_time.getTime() ) / 60000
 	
-	words_per_minute = words.length / delta
-	characters_per_minute = $('#copy').text().length / delta
+	stat_wpm = words.length / delta
+	stat_cpm = $('#copy').text().length / delta
 	
 	$('#results-wpm').text(Math.round(words_per_minute))
 	$('#results-cpm').text(Math.round(characters_per_minute))
-	
-	submit_results(words.length, delta, words_per_minute, characters_per_minute)
 }
 
 function submit_results(words, duration, words_per_minute, characters_per_minute) {
@@ -131,4 +138,5 @@ $(document).ready(function() {
 	add_key_listener()
 	
 	poll = setInterval(eval_next_in_queue, 30)
+	init_pollers()
 })

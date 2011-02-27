@@ -15,3 +15,5 @@ function add_key_listener() {
 		check_queue.push(event.keyCode)
 	})
 }
+
+function init_pollers() { }
