@@ -27,7 +27,11 @@ function find_room() {
 		// (for use in the countdown)
 		room = _room;
 		room.id = parseInt(room.id)
-		room.players = []; // hack
+		
+		$.each(room.players, function(idx, player) {
+			add_player_row(idx, player)
+			show_player_update(idx, player)
+		})
 		
 		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
 		poll = setInterval(eval_next_in_queue, 30)
@@ -45,11 +49,9 @@ function start() {
 // process stats received from the server
 function update_player_stats(players) {
 	$.each(players, function(idx, player) {
-		console.log(idx, player)
 		if ( room.players[idx] == undefined ) {
 			room.players[idx] = player
-			$('table.stats').append('<tr id="player-' + idx + '"><td>' + player.name + '</td><td></td><td>' + player.wpm + '</td><td>' + player.cpm + '</td></tr>')
-			$($('table.stats tr#player-' + idx + ' td')[1]).progressbar();
+			add_player_row(idx, player)
 		} else {
 			room.players[idx].wpm = player.wpm
 			room.players[idx].cpm = player.cpm
@@ -58,6 +60,12 @@ function update_player_stats(players) {
 		
 		show_player_update(idx, player)
 	})
+}
+
+// add a row into the stats table for a given player
+function add_player_row(cur_player_id, player) {
+	$('table.stats').append('<tr id="player-' + cur_player_id + '"><td>' + player.name + '</td><td></td><td>' + player.wpm + '</td><td>' + player.cpm + '</td></tr>')
+	$($('table.stats tr#player-' + idx + ' td')[1]).progressbar();
 }
 
 // update a certain player's progress bar and stats
