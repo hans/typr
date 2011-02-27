@@ -54,6 +54,7 @@ function update_player_stats(players) {
 		} else {
 			room.players[idx].wpm = player.wpm
 			room.players[idx].cpm = player.cpm
+			room.players[idx].cur_word_idx = player.cur_word_idx
 			room.players[idx].done = player.done
 		}
 		
@@ -70,17 +71,28 @@ function add_player_row(cur_player_id, player) {
 // update a certain player's progress bar and stats
 function show_player_update(cur_player_id, player) {
 	var columns = $('table.stats tr#player-' + cur_player_id + ' td')
-	$(columns[1]).progressbar('value', player.progress * 100)
+	$(columns[1]).progressbar('value', get_player_progress(player.cur_word_idx) * 100)
 	$(columns[2]).text(player.wpm)
 	$(columns[3]).text(player.cpm)
+}
+
+function get_player_progress(player_cur_word_idx) {
+	return player_cur_word_idx / words.length
 }
 
 function show_countdown(time_left) {
 	countdown_el.text(time_left)
 }
 
+function highlight_leader() {
+	sorted_players = room.players.sort(function(a, b) {
+		a.cur_word_idx - b.cur_word_idx
+	})
+	console.log(sorted_players)
+}
+
 function init_pollers() {
-	server_poll = setInterval(poll_server, 2000)
+	server_poll = setInterval(poll_server, 3000)
 }
 
 function poll_server() {
@@ -105,9 +117,10 @@ function poll_server() {
 		player_name: player_name,
 		wpm: stat_wpm,
 		cpm: stat_cpm,
-		progress: stat_progress,
+		cur_word_idx: cur_word_idx,
 		done: is_done
 	}, function(data) {
 		update_player_stats(data.players)
+		highlight_leader()
 	}, 'json')
 }

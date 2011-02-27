@@ -120,7 +120,6 @@ function calculate_stats() {
 	
 	stat_wpm = Math.round(words_typed / stat_delta)
 	stat_cpm = Math.round(chars_typed / stat_delta)
-	stat_progress = chars_typed / total_chars
 	
 	$('#results-wpm').text(stat_wpm)
 	$('#results-cpm').text(stat_cpm)

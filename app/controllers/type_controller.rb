@@ -39,7 +39,7 @@ class TypeController < ApplicationController
   
   respond_to :json
   def update_player_status
-    data_str = [params[:player_name], params[:wpm], params[:cpm], params[:progress], params[:done]].join ':'
+    data_str = [params[:player_name], params[:wpm], params[:cpm], params[:cur_word_idx], params[:done]].join ':'
     REDIS.hset "rooms:id:#{params[:room_id]}", params[:player_id], data_str
     
     render :json => {'id' => params[:room_id], 'players' => get_players(params[:room_id])}
@@ -84,7 +84,7 @@ class TypeController < ApplicationController
   def get_players room_id
     REDIS.hgetall('rooms:id:' + room_id.to_s).map do |player_id, player_data_str|
       player_data = player_data_str.split ':'
-      {'name' => player_data[0], 'wpm' => player_data[1], 'cpm' => player_data[2], 'progress' => player_data[3], 'done' => player_data[4]}
+      {'name' => player_data[0], 'wpm' => player_data[1], 'cpm' => player_data[2], 'cur_word_idx' => player_data[3], 'done' => player_data[4]}
     end
   end
 end
