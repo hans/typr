@@ -56,7 +56,7 @@ Typr::Application.routes.draw do
   match "/type/compete/room/find" => "type#find_room"
   match "/type/compete/room/:id" => "type#room_status"
   match "/type/compete/room/:id/start" => "type#start_room"
-  match "/type/compete/room/:room_id/:player_id/:name,:wpm,:cpm,:done" => "type#update_player_status"
+  match "/type/compete/room/:room_id/:player_id" => "type#update_player_status"
   
   match "/type/copy/:category" => "type#copy"
   match "/type/practice" => "type#practice"
