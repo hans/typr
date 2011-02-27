@@ -100,7 +100,8 @@ function done() {
 }
 
 function calculate_stats() {
-	stat_delta = ( end_time.getTime() - start_time.getTime() ) / 60000
+	compare_time = ( end_time == undefined ) ? new Date() : end_time
+	stat_delta = ( compare_time.getTime() - start_time.getTime() ) / 60000
 	
 	stat_wpm = words.length / delta
 	stat_cpm = $('#copy').text().length / delta
