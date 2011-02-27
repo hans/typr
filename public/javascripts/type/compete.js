@@ -34,7 +34,6 @@ function find_room() {
 		})
 		
 		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
-		console.log('num words', num_words)
 		poll = setInterval(eval_next_in_queue, 30)
 		init_pollers()
 	}, 'json')
@@ -79,7 +78,6 @@ function show_player_update(cur_player_id, player) {
 }
 
 function get_player_progress(player_cur_word_idx) {
-	console.log(num_words)
 	return player_cur_word_idx / num_words
 }
 
