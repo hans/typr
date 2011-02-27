@@ -118,13 +118,13 @@ function calculate_stats() {
 	stat_cpm = chars_typed / stat_delta
 	
 	$('#results-wpm').text(Math.round(stat_wpm))
-	$('#results-cpm').text(Math.round(stat_wpm))
+	$('#results-cpm').text(Math.round(stat_cpm))
 }
 
 function submit_results(words, duration, words_per_minute, characters_per_minute) {
 	$.post('/type/submit', {
 		words: words,
-		duration: delta,
+		duration: stat_delta,
 		wpm: words_per_minute,
 		cpm: characters_per_minute
 	}, null, 'json')
