@@ -90,7 +90,11 @@ function highlight_leader() {
 	sorted_players = sorted_players.sort(function(a, b) {
 		return room.players[a].cur_word_idx - room.players[b].cur_word_idx
 	})
-	console.log(sorted_players)
+	
+	if ( sorted_players[0].id != player_id ) {
+		words.removeClass('highlight-leader')
+		$(words[sorted_players[0].cur_word_idx]).addClass('highlight-leader')
+	}
 }
 
 function init_pollers() {

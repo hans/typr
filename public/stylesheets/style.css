@@ -47,6 +47,18 @@ h2 {
 	display: inline-block;
 }
 
+#copy span.personal-highlight {
+	color: #6fbf4d;
+}
+
+#copy span.leader-highlight {
+	color: #ff0000;
+}
+
+#copy span.personal-highlight.leader-highlight {
+	color: #6fbf4d;
+}
+
 #note {
 	text-align: right;
 	color: #aaa;

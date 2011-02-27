@@ -92,10 +92,10 @@ function next_word() {
 	
 		// remove highlighting from the old word
 		if ( words[cur_word_idx - 1] != undefined )
-			words[cur_word_idx - 1].style.color = 'inherit'
+			$(words[cur_word_idx - 1]).removeClass('personal-highlight')
 		
 		// highlight the new word
-		words[cur_word_idx].style.color = '#6fbf4d'
+		$(words[cur_word_idx]).addClass('personal-highlight')
 		
 		// remove this successfully-typed word from the entry box
 		// but don't remove any other things that could've been typed since the success!
