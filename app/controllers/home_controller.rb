@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     p top_profile_ids
     
     top_profile_ids.each do |profile|
-      @top_profiles << [Profile.find(profile.profile_id), profile.num_records, profile.avg_wpm, profile.avg_cpm]
+      @top_profiles << [Profile.find(profile.profile_id), profile.num_records, profile.avg_wpm.to_f, profile.avg_cpm.to_f]
     end
   end
 end
