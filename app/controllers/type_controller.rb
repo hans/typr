@@ -41,7 +41,7 @@ class TypeController < ApplicationController
     data_str = [params[:name], params[:wpm], params[:cpm], params[:done]].join ':'
     REDIS.hset "rooms:id:#{params[:room_id]}", params[:player_id], data_str
     
-    render :json => {'id' => params[:room_id], 'players' => get_players(room_id)}
+    render :json => {'id' => params[:room_id], 'players' => get_players(params[:room_id])}
   end
   
   respond_to :json
