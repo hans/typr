@@ -10,8 +10,7 @@ gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 
 gem 'jquery-rails'
 
-#gem 'gc4r', :svn => 'http://gc4r.googlecode.com/svn/trunk'
-gem 'gchartrb'
+gem 'redis'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
