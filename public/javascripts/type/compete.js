@@ -41,6 +41,31 @@ function start() {
 	})
 }
 
+// process stats received from the server
+function update_player_stats(players) {
+	$.each(players, function(idx, player) {
+		if ( room.players[idx] == undefined ) {
+			room.players[idx] = player
+			$('table.stats').append('<tr id="player-' + idx + '"><td>' + player.name + '</td><td></td><td>' + player.wpm + '</td><td>' + player.cpm + '</td></tr>')
+			$($('table.stats tr#player-' + idx + ' td')[1]).progressbar();
+		} else {
+			room.players[idx].wpm = player.wpm
+			room.players[idx].cpm = player.cpm
+			room.players[idx].done = player.done
+		}
+		
+		show_player_update(idx, player)
+	})
+}
+
+// update a certain player's progress bar and stats
+function show_player_update(cur_player_id, player) {
+	var columns = $('#table.stats tr#player-' + cur_player_id + ' td')
+	$(columns[1]).progressbar('value', player.progress)
+	$(columns[2]).text(player.wpm)
+	$(columns[3]).text(player.cpm)
+}
+
 function show_countdown(time_left) {
 	countdown_el.text(time_left)
 }
@@ -51,7 +76,7 @@ function init_pollers() {
 
 function poll_server() {
 	if ( start_time == null ) {
-		time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
+		var time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
 		show_countdown(Math.round(time_before_start))
 		
 		if ( time_before_start < 0 )
@@ -73,6 +98,6 @@ function poll_server() {
 		cpm: stat_cpm,
 		done: is_done
 	}, function(data) {
-		console.log(data)
+		update_player_stats(data.players)
 	}, 'json')
 }
