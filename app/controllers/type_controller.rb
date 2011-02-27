@@ -2,7 +2,7 @@
 
 class TypeController < ApplicationController
   def compete
-    @page_scripts = ['type']
+    @page_scripts = ['type/compete', 'type']
   end
   
   respond_to :json
@@ -45,7 +45,7 @@ class TypeController < ApplicationController
   end
   
   def practice
-    @page_scripts = ['type']
+    @page_scripts = ['type/practice', 'type']
   end
   
   respond_to :json

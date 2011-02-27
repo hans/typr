@@ -30,21 +30,6 @@ end_time = null
 // set @ $(document).ready()
 type_area = null
 
-// convert plain-text copy to something we can highlight more easily
-function prepare_copy() {
-	$.get('/type/copy/' + copy_category, null, function(copy) {
-		split = copy['copy']['content'].split(' ')
-		$.each(split, function(idx, word) {
-			$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
-		})
-		
-		$('#note').text(copy['copy']['note'])
-		
-		words = $('#copy span.word')
-		next_word()
-	}, 'json')
-}
-
 function eval_next_in_queue() {
 	if ( check_queue.length == 0 ) return;
 	
@@ -131,14 +116,8 @@ function hide_error() {
 $(document).ready(function() {
 	type_area = $('#type_area')
 	
-	prepare_copy()
-	
-	type_area.keyup(function(event) {
-		can_show_error = true
-		if ( start_time == null ) start_time = new Date()
-		
-		check_queue.push(event.keyCode)
-	})
+	prepare()
+	add_key_listener()
 	
 	poll = setInterval(eval_next_in_queue, 30)
 })
