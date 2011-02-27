@@ -21,7 +21,7 @@ class TypeController < ApplicationController
     end
     
     # add the user to the retrieved room
-    REDIS.hset "rooms:id:#{room_id}", current_user.id, current_user.email + ":0:0"
+    REDIS.hset "rooms:id:#{room_id}", current_user.id, current_user.email + ":0:0:false"
     
     render :json => {
       'id' => room_id,
