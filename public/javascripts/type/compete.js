@@ -1,5 +1,6 @@
 // length of the countdown, in seconds
 COUNTDOWN_TIME = 15
+countdown_el = null
 
 // room data container
 room = null
@@ -9,6 +10,7 @@ server_poll = null
 first_poll = true
 
 function prepare() {
+	countdown_el = $('#countdown')
 	find_room()
 }
 
@@ -39,6 +41,10 @@ function start() {
 	})
 }
 
+function show_countdown(time_left) {
+	countdown_el.text(time_left)
+}
+
 function init_pollers() {
 	server_poll = setInterval(poll_server, 2000)
 }
@@ -46,6 +52,8 @@ function init_pollers() {
 function poll_server() {
 	if ( start_time == null ) {
 		time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
+		show_countdown(Math.round(time_before_start))
+		
 		if ( time_before_start < 0 )
 			start()
 		return
