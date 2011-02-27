@@ -101,8 +101,10 @@ function next_word() {
 function done() {
 	is_done = true
 	
-	end_time = new Date()
 	clearInterval(poll)
+	if ( server_poll != undefined ) clearInterval(server_poll)
+	
+	end_time = new Date()
 	type_area.css('background-color', '#6fbf4d')
 	
 	calculate_stats()
