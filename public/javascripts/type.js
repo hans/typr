@@ -51,6 +51,7 @@ function prepare_copy(words_arr, note) {
 	$('#note').text(note)
 	
 	words = $('#copy span.word')
+	console.log(words_arr, words);
 	num_words = words_arr.length
 	total_chars = $('#copy').text().length
 	
