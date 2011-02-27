@@ -1,3 +1,6 @@
+// length of the countdown, in seconds
+COUNTDOWN_TIME = 15
+
 // room data container
 room = null
 
@@ -18,7 +21,11 @@ function add_key_listener() {
 
 function find_room() {
 	$.get('/type/compete/room/find', null, function(_room) {
+		// set the global room object, and make sure its ID is an int
+		// (for use in the countdown)
 		room = _room;
+		room.id = parseInt(room.id)
+		
 		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
 		poll = setInterval(eval_next_in_queue, 30)
 	}, 'json')
@@ -29,7 +36,11 @@ function init_pollers() {
 }
 
 function poll_server() {
-	if ( start_time == null ) return
+	if ( start_time == null ) {
+		time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
+		console.log(time_before_start);
+	}
+	
 	if ( first_poll ) {
 		first_poll = false
 		return
