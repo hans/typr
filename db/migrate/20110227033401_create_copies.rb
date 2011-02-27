@@ -3,7 +3,7 @@ class CreateCopies < ActiveRecord::Migration
     create_table :copies do |t|
       t.integer :category
       t.text :content
-      t.text :note
+      t.string :note
 
       t.timestamps
     end

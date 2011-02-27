@@ -15,12 +15,12 @@ ActiveRecord::Schema.define(:version => 20110227033401) do
   create_table "copies", :force => true do |t|
     t.integer  "category"
     t.text     "content"
+    t.string   "extra"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "profiles", :force => true do |t|
-    t.string   "name"
     t.string   "layout"
     t.string   "keyboard"
     t.datetime "created_at"
