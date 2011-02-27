@@ -34,11 +34,13 @@ type_area = null
 stat_delta = null
 stat_wpm = null
 stat_cpm = null
+stat_progress = null
 is_done = false
 
 // more stats
 words_typed = 0
 chars_typed = 0
+total_chars = 0
 
 function prepare_copy(words_arr, note) {
 	$.each(words_arr, function(idx, word) {
@@ -48,6 +50,8 @@ function prepare_copy(words_arr, note) {
 	$('#note').text(note)
 	
 	words = $('#copy span.word')
+	total_chars = $('#copy').text().length
+	
 	next_word()
 }
 
@@ -114,11 +118,12 @@ function calculate_stats() {
 	compare_time = ( end_time == undefined ) ? new Date() : end_time
 	stat_delta = ( compare_time.getTime() - start_time.getTime() ) / 60000
 	
-	stat_wpm = words_typed / stat_delta
-	stat_cpm = chars_typed / stat_delta
+	stat_wpm = Math.round(words_typed / stat_delta)
+	stat_cpm = Math.round(chars_typed / stat_delta)
+	stat_progress = Math.round(chars_typed / total_chars)
 	
-	$('#results-wpm').text(Math.round(stat_wpm))
-	$('#results-cpm').text(Math.round(stat_cpm))
+	$('#results-wpm').text(stat_wpm)
+	$('#results-cpm').text(stat_cpm)
 }
 
 function submit_results(words, duration, words_per_minute, characters_per_minute) {

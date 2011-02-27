@@ -98,6 +98,7 @@ function poll_server() {
 		player_name: player_name,
 		wpm: stat_wpm,
 		cpm: stat_cpm,
+		progress: stat_progress,
 		done: is_done
 	}, function(data) {
 		console.log(data.players)

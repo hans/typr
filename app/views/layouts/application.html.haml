@@ -3,6 +3,9 @@
 	%head
 		%title= controller.controller_name.capitalize
 		= stylesheet_link_tag 'style'
+		- if @page_styles
+			- @page_styles.each do |style|
+				= stylesheet_link_tag style
 		= javascript_include_tag :defaults
 		- if @page_scripts
 			- @page_scripts.each do |script|
