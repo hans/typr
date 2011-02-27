@@ -36,8 +36,8 @@ stat_wpm = null
 stat_cpm = null
 done = false
 
-function prepare_copy(words, note) {
-	$.each(words, function(idx, word) {
+function prepare_copy(words_arr, note) {
+	$.each(words_arr, function(idx, word) {
 		$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
 	})
 	
