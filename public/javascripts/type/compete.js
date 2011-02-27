@@ -71,7 +71,7 @@ function add_player_row(cur_player_id, player) {
 // update a certain player's progress bar and stats
 function show_player_update(cur_player_id, player) {
 	var columns = $('table.stats tr#player-' + cur_player_id + ' td')
-	$(columns[1]).progressbar('value', player.progress)
+	$(columns[1]).progressbar('value', player.progress * 100)
 	$(columns[2]).text(player.wpm)
 	$(columns[3]).text(player.cpm)
 }
