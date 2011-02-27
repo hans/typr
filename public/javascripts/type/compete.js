@@ -88,12 +88,12 @@ function show_countdown(time_left) {
 function highlight_leader() {
 	sorted_players = $.keys(room.players)
 	sorted_players = sorted_players.sort(function(a, b) {
-		return room.players[a].cur_word_idx - room.players[b].cur_word_idx
+		return room.players[b].cur_word_idx - room.players[a].cur_word_idx
 	})
 	
 	if ( sorted_players[0].id != player_id ) {
 		words.removeClass('highlight-leader')
-		$(words[sorted_players[0].cur_word_idx]).addClass('highlight-leader')
+		$(words[room.players[sorted_players[0]].cur_word_idx]).addClass('highlight-leader')
 	}
 }
 
