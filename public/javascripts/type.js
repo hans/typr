@@ -30,6 +30,17 @@ end_time = null
 // set @ $(document).ready()
 type_area = null
 
+function prepare_copy(words, note) {
+	$.each(words, function(idx, word) {
+		$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
+	})
+	
+	$('#note').text(copy['copy']['note'])
+	
+	words = $('#copy span.word')
+	next_word()
+}
+
 function eval_next_in_queue() {
 	if ( check_queue.length == 0 ) return;
 	

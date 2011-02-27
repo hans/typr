@@ -2,14 +2,7 @@
 function prepare() {
 	$.get('/type/copy/' + copy_category, null, function(copy) {
 		split = copy['copy']['content'].split(' ')
-		$.each(split, function(idx, word) {
-			$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
-		})
-		
-		$('#note').text(copy['copy']['note'])
-		
-		words = $('#copy span.word')
-		next_word()
+		prepare_copy(split, copy['copy']['note'])
 	}, 'json')
 }
 
