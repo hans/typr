@@ -36,6 +36,10 @@ stat_wpm = null
 stat_cpm = null
 done = false
 
+// more stats
+words_typed = 0
+chars_typed = 0
+
 function prepare_copy(words_arr, note) {
 	$.each(words_arr, function(idx, word) {
 		$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
@@ -62,11 +66,18 @@ function eval_next_in_queue() {
 	else
 		if ( typed_text != check )
 			show_error()
+		else
+			chars_typed += 1
 }
 
 function next_word() {
 	var old_word = cur_word
 	cur_word_idx += 1
+	
+	// increase words_typed, and account for the spacebar char
+	// increment chars_typed as well
+	words_typed += 1
+	chars_typed += 1
 	
 	if ( words[cur_word_idx] == undefined ) {
 		done()
@@ -103,8 +114,8 @@ function calculate_stats() {
 	compare_time = ( end_time == undefined ) ? new Date() : end_time
 	stat_delta = ( compare_time.getTime() - start_time.getTime() ) / 60000
 	
-	stat_wpm = words.length / stat_delta
-	stat_cpm = $('#copy').text().length / stat_delta
+	stat_wpm = words_typed / stat_delta
+	stat_cpm = chars_typed / stat_delta
 	
 	$('#results-wpm').text(Math.round(stat_wpm))
 	$('#results-cpm').text(Math.round(stat_wpm))
