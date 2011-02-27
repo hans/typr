@@ -151,5 +151,4 @@ $(document).ready(function() {
 	type_area = $('#type_area')
 	
 	prepare()
-	init_pollers()
 })
