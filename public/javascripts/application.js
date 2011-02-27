@@ -6,5 +6,7 @@ $.extend({
 		$.each(obj, function(k) {
 			a.push(k)
 		})
+		
+		return a
 	}
 })
