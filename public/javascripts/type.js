@@ -86,7 +86,7 @@ function next_word() {
 	if ( words[cur_word_idx] == undefined ) {
 		done()
 	} else {
-		cur_word = words[cur_word_idx].innerText
+		cur_word = words[cur_word_idx].innerHTML
 	
 		// remove highlighting from the old word
 		if ( words[cur_word_idx - 1] != undefined )
