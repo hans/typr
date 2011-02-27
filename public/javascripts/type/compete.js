@@ -78,8 +78,8 @@ function show_player_update(cur_player_id, player) {
 }
 
 function get_player_progress(player_cur_word_idx) {
-	console.log(words)
-	return player_cur_word_idx / words.length
+	console.log(num_words)
+	return player_cur_word_idx / num_words
 }
 
 function show_countdown(time_left) {

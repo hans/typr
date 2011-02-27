@@ -9,6 +9,7 @@ copy_category = 1
 
 // an array of words in the copy, filled by prepare_copy()
 words = null
+num_words = 0
 
 // an array of recently-typed characters, sorted from oldest to newest.
 // this is digested by eval_next_in_queue().
@@ -50,6 +51,7 @@ function prepare_copy(words_arr, note) {
 	$('#note').text(note)
 	
 	words = $('#copy span.word')
+	num_words = words_arr.length
 	total_chars = $('#copy').text().length
 	
 	next_word()
@@ -111,7 +113,7 @@ function done() {
 	type_area.css('background-color', '#6fbf4d')
 	
 	calculate_stats()
-	submit_results(words.length, stat_delta, stat_wpm, stat_cpm)
+	submit_results(num_words, stat_delta, stat_wpm, stat_cpm)
 }
 
 function calculate_stats() {
