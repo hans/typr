@@ -27,6 +27,7 @@ function find_room() {
 		// (for use in the countdown)
 		room = _room;
 		room.id = parseInt(room.id)
+		room.players = []; // hack
 		
 		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
 		poll = setInterval(eval_next_in_queue, 30)
