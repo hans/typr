@@ -38,7 +38,7 @@ function prepare_copy() {
 			$('#copy').append('<span class="word">' + word + '</span>&nbsp;')
 		})
 		
-		$('#note').text(copy['copy']['extra'])
+		$('#note').text(copy['copy']['note'])
 		
 		words = $('#copy span.word')
 		next_word()
