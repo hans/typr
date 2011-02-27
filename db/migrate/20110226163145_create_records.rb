@@ -5,9 +5,9 @@ class CreateRecords < ActiveRecord::Migration
       t.integer :profile_id
       
       t.integer :words
-      t.integer :duration
-      t.integer :wpm
-      t.integer :cpm
+      t.float :duration
+      t.float :wpm
+      t.float :cpm
 
       t.timestamps
     end
