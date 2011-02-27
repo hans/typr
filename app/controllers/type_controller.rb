@@ -44,6 +44,16 @@ class TypeController < ApplicationController
     render :json => {'id' => room_id, 'players' => get_players(room_id)}
   end
   
+  respond_to :json
+  def start_room
+    if REDIS.sismember 'rooms:open', params[:id]
+      REDIS.srem 'rooms:open', params[:id]
+      REDIS.sadd 'rooms:playing', params[:id]
+    end
+    
+    render :json => true
+  end
+  
   def practice
     @page_scripts = ['type/practice', 'type']
   end

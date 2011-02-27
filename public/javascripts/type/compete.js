@@ -31,6 +31,14 @@ function find_room() {
 	}, 'json')
 }
 
+function start() {
+	$.get('/type/compete/room/' + room.id + '/start', null, function(data) {
+		console.log(data)
+		start_time = new Date()
+		add_key_listener()
+	})
+}
+
 function init_pollers() {
 	server_poll = setInterval(poll_server, 1000)
 }
@@ -38,7 +46,9 @@ function init_pollers() {
 function poll_server() {
 	if ( start_time == null ) {
 		time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
-		console.log(time_before_start);
+		if ( time_before_start < 0 )
+			start()
+		return
 	}
 	
 	if ( first_poll ) {

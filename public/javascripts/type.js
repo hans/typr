@@ -135,6 +135,5 @@ $(document).ready(function() {
 	type_area = $('#type_area')
 	
 	prepare()
-	add_key_listener()
 	init_pollers()
 })

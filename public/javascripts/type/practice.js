@@ -3,6 +3,7 @@ function prepare() {
 	$.get('/type/copy/' + copy_category, null, function(copy) {
 		split = copy['copy']['content'].split(' ')
 		prepare_copy(split, copy['copy']['note'])
+		add_key_listener()
 		poll = setInterval(eval_next_in_queue, 30)
 	}, 'json')
 }
