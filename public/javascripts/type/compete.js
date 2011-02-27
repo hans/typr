@@ -34,6 +34,7 @@ function find_room() {
 		})
 		
 		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
+		console.log('num words', num_words)
 		poll = setInterval(eval_next_in_queue, 30)
 		init_pollers()
 	}, 'json')
