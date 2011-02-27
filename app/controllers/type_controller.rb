@@ -8,18 +8,26 @@ class TypeController < ApplicationController
   respond_to :json
   def find_room
     room_id = REDIS.srandmember 'rooms:open'
+    room_copy = nil
     
     if room_id.nil?
       room_id = Time.now.to_i
       REDIS.sadd 'rooms:open', room_id
+      
+      room_copy = Copy.find :first, :order => 'random()'
+      REDIS.set "rooms:id:#{room_id}:copy", room_copy.id
     else
-      room_wait = REDIS.get "rooms:id:#{room_id}:wait"
+      room_copy = Copy.find REDIS.get("rooms:id:#{room_id}:copy")
     end
     
     # add the user to the retrieved room
     REDIS.hset "rooms:id:#{room_id}", current_user.id, current_user.email + ":0:0"
     
-    render :json => {'id' => room_id, 'players' => get_players(room_id)}
+    render :json => {
+      'id' => room_id,
+      'copy' => [copy.content, copy.extra]
+      'players' => get_players(room_id)
+    }
   end
   
   respond_to :json
