@@ -25,7 +25,7 @@ class TypeController < ApplicationController
     
     render :json => {
       'id' => room_id,
-      'copy' => [room_copy.content, room_copy.extra],
+      'copy' => [room_copy.content, room_copy.note],
       'players' => get_players(room_id)
     }
   end
