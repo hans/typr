@@ -1,7 +1,7 @@
 # coding: utf-8
 
 class TypeController < ApplicationController
-  def type
+  def practice
     @page_scripts = ['type']
   end
   

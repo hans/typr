@@ -52,8 +52,8 @@ Typr::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => "home#index"
   
-  match "/type" => "type#type"
   match "/type/copy/:category" => "type#copy"
+  match "/type/practice" => "type#practice"
   match "/type/submit" => "type#submit"
   
   match "/profiles" => "profiles#index"
