@@ -140,5 +140,5 @@ $(document).ready(function() {
 		check_queue.push(event.keyCode)
 	})
 	
-	poll = setInterval(eval_next_in_queue, 100)
+	poll = setInterval(eval_next_in_queue, 30)
 })
