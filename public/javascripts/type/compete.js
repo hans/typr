@@ -44,6 +44,7 @@ function start() {
 // process stats received from the server
 function update_player_stats(players) {
 	$.each(players, function(idx, player) {
+		console.log(idx, player)
 		if ( room.players[idx] == undefined ) {
 			room.players[idx] = player
 			$('table.stats').append('<tr id="player-' + idx + '"><td>' + player.name + '</td><td></td><td>' + player.wpm + '</td><td>' + player.cpm + '</td></tr>')
@@ -98,6 +99,7 @@ function poll_server() {
 		cpm: stat_cpm,
 		done: is_done
 	}, function(data) {
+		console.log(data.players)
 		update_player_stats(data.players)
 	}, 'json')
 }
