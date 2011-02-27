@@ -34,7 +34,7 @@ function poll_server() {
 	}
 	
 	stats = calculate_stats()
-	url = '/type/compete/room/' + room['id'] + '/' + player_id + '/' + player_name ',' + stat_wpm + ',' + stat_cpm + done
+	url = '/type/compete/room/' + room['id'] + '/' + player_id + '/' + player_name + ',' + stat_wpm + ',' + stat_cpm + done
 	$.get(url, null, function(data) {
 		console.log(data)
 	})
