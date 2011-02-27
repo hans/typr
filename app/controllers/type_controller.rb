@@ -84,7 +84,7 @@ class TypeController < ApplicationController
   def get_players room_id
     REDIS.hgetall('rooms:id:' + room_id.to_s).map do |player_id, player_data_str|
       player_data = player_data_str.split ':'
-      {'name' => player_data[0], 'wpm' => player_data[1], 'cpm' => player_data[2], 'progress' => player_data[3], 'done' => player_data[3]}
+      {'name' => player_data[0], 'wpm' => player_data[1], 'cpm' => player_data[2], 'progress' => player_data[3], 'done' => player_data[4]}
     end
   end
 end
