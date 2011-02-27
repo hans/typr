@@ -1,0 +1,20 @@
+%ul#nav
+	%li= link_to 'Type', '/type'
+	%li= link_to 'History', '/history'
+
+%h2 Top Records
+= render :partial => 'shared/records', :locals => { :records => @top_records }
+
+%h2 Top Profiles
+%table
+	%tr
+		%th Profile
+		%th Records
+		%th Average WPM
+		%th Average CPM
+	- @top_profiles.each do |p|
+		%tr
+			%td= link_to p[0].layout + " / " + p[0].keyboard, :controller => 'profiles', :action => 'view', :id => p[0].id
+			%td= p[1]
+			%td= p[2].round
+			%td= p[3].round

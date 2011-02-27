@@ -1,0 +1,12 @@
+%h2 Information
+%table
+	%tr
+		%th Layout
+		%td= @profile.layout
+	%tr
+		%th Keyboard
+		%td= @profile.keyboard
+
+%h2 Recent Records
+= render :partial => 'shared/records', :locals => { :records => @records, :hide_profile => true }
+= @wpm_data

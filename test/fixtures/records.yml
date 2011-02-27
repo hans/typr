@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  words: 1
+  duration: 1
+  wpm: 1
+  cpm: 1
+
+two:
+  words: 1
+  duration: 1
+  wpm: 1
+  cpm: 1

@@ -1,0 +1,16 @@
+:javascript
+	$(document).ready(function() {
+		options = {
+			series: {
+				lines: { show: true },
+				points: { show: true }
+			},
+			xaxis: {
+				mode: 'time'
+			}
+		}
+		$.plot('#wpm_chart_container', #{@wpm.to_json}, options)
+		$.plot('#cpm_chart_container', #{@cpm.to_json}, options)
+	})
+#wpm_chart_container.chart
+#cpm_chart_container.chart

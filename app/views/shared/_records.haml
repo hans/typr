@@ -1,0 +1,16 @@
+%table
+	%tr
+		%th User
+		- unless defined?(hide_profile)
+			%th Profile
+		%th WPM
+		%th CPM
+		%th Date
+	- records.each do |r|
+		%tr
+			%td= r.user.email
+			- unless defined?(hide_profile)
+				%td= r.profile.layout + " / " + r.profile.keyboard
+			%td= r.wpm
+			%td= r.cpm
+			%td= time_ago_in_words(r.created_at) + " ago"

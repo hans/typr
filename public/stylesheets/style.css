@@ -1,0 +1,101 @@
+@import url('http://fonts.googleapis.com/css?family=Arvo');
+@import url('http://fonts.googleapis.com/css?family=Droid%20Serif');
+@import url('http://fonts.googleapis.com/css?family=Vollkorn');
+
+body {
+	margin: 0;
+	padding: 0;
+	
+	color: #222;
+}
+
+h1#header {
+	color: #282828;
+	font-family: Arvo;
+	font-size: 50px;
+	font-weight: normal;
+	letter-spacing: -2px;
+	text-align: center;
+}
+
+h1#header a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+h2 {
+	color: #1b1b1b;
+	font-family: Arvo;
+	font-weight: normal;
+}
+
+#container {
+	width: 700px;
+	margin: 50px auto;
+}
+
+#copy, #note {
+	font-family: Vollkorn;
+}
+
+#copy {
+	width: 700px;
+	color: #151515;
+}
+
+#copy span {
+	display: inline-block;
+}
+
+#note {
+	text-align: right;
+	color: #aaa;
+	margin: 7px 0px 5px 0px;
+}
+
+input#type_area {
+	background-color: #fafafa;
+	border: 1px solid #aeb3b8;
+	color: #333;
+	font-size: 15px;
+	
+	outline: none;
+	width: 200px;
+	height: 30px;
+	padding: 4px;
+	margin: 15px auto;
+	display: block;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+
+	-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, .66), 0 1px 4px rgba(0, 0, 0, .1) inset;
+	-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, .66), 0 1px 4px rgba(0, 0, 0, .1) inset;
+	box-shadow: 0 1px 1px rgba(255, 255, 255, .66), 0 1px 4px rgba(0, 0, 0, .1) inset;
+}
+
+table#results {
+	width: 200px;
+	margin: 20px auto;
+	font-family: 'Droid Serif', 'Times New Roman', serif;
+	text-align: center;
+	display: none;
+}
+
+table#results td {
+	font-size: 30px;
+}
+
+table#results th {
+	font-size: 14px;
+	font-variant: small-caps;
+	font-weight: normal;
+	color: #ccc;
+}
+
+.chart {
+	width: 600px;
+	height: 300px;
+	margin: 20px auto;
+}
