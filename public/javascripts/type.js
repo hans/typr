@@ -103,11 +103,11 @@ function calculate_stats() {
 	compare_time = ( end_time == undefined ) ? new Date() : end_time
 	stat_delta = ( compare_time.getTime() - start_time.getTime() ) / 60000
 	
-	stat_wpm = words.length / delta
-	stat_cpm = $('#copy').text().length / delta
+	stat_wpm = words.length / stat_delta
+	stat_cpm = $('#copy').text().length / stat_delta
 	
-	$('#results-wpm').text(Math.round(words_per_minute))
-	$('#results-cpm').text(Math.round(characters_per_minute))
+	$('#results-wpm').text(Math.round(stat_wpm))
+	$('#results-cpm').text(Math.round(stat_wpm))
 }
 
 function submit_results(words, duration, words_per_minute, characters_per_minute) {
