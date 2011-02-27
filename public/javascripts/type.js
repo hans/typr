@@ -136,7 +136,5 @@ $(document).ready(function() {
 	
 	prepare()
 	add_key_listener()
-	
-	poll = setInterval(eval_next_in_queue, 30)
 	init_pollers()
 })
