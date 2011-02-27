@@ -70,7 +70,7 @@ class TypeController < ApplicationController
   def submit
     @record = Record.create :duration => params[:duration], :words => params[:words], :wpm => params[:wpm], :cpm => params[:cpm]
     @record.user = current_user
-    @record.profile_id = current_user.default_profile_id
+    @record.profile_id = current_user.default_profile_id || Profile.find(:first, :layout => "QWERTY", :keyboard => "Unknown Keyboard").id
     @record.save
     
     render :json => ( @record ? true : false )
