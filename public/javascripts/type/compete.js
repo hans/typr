@@ -92,8 +92,8 @@ function highlight_leader() {
 	})
 	
 	if ( sorted_players[0].id != player_id ) {
-		words.removeClass('highlight-leader')
-		$(words[room.players[sorted_players[0]].cur_word_idx]).addClass('highlight-leader')
+		words.removeClass('leader-highlight')
+		$(words[room.players[sorted_players[0]].cur_word_idx]).addClass('leader-highlight')
 	}
 }
 
