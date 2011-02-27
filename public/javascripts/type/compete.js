@@ -40,7 +40,7 @@ function start() {
 }
 
 function init_pollers() {
-	server_poll = setInterval(poll_server, 1000)
+	server_poll = setInterval(poll_server, 2000)
 }
 
 function poll_server() {
