@@ -77,6 +77,7 @@ function show_player_update(cur_player_id, player) {
 }
 
 function get_player_progress(player_cur_word_idx) {
+	console.log(words)
 	return player_cur_word_idx / words.length
 }
 
