@@ -1,5 +1,5 @@
-class HistoryController < ApplicationController
-  def index
+class AccountController < ApplicationController
+  def history
     @records = current_user.records.sort do |a, b|
       a.created_at - b.created_at
     end
@@ -20,5 +20,10 @@ class HistoryController < ApplicationController
     @cpm = @cpm.values
     
     @page_scripts = ['excanvas.min', 'jquery.flot.min', 'history']
+  end
+  
+  def settings
+    p params
+    @user = current_user
   end
 end

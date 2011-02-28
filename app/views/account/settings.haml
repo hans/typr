@@ -1,0 +1,5 @@
+= form_for :user, @user, :url => { :action => 'settings' } do
+	%h2 Default Profile
+		= select_tag 'default_profile[layout]', options_for_select([['QWERTY', 'QWERTY'], ['Dvorak', 'Dvorak'], ['Colemak', 'Colemak']], @user.default_profile.layout)
+		= text_field :default_profile, :keyboard, :value => @user.default_profile.keyboard
+	= submit_tag 'Update'
