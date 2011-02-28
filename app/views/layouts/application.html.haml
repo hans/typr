@@ -12,6 +12,12 @@
 				= javascript_include_tag script
 		= csrf_meta_tag
 	%body
+		#account
+			- if user_signed_in?
+				Signed in as #{current_user.email}. Not you?
+				= link_to "Sign out", destroy_user_session_path
+			- else
+				= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 		%h1#header= link_to 'typr', '/'
 		%ul#nav
 			- if user_signed_in?
@@ -23,10 +29,4 @@
 			#flash
 				.notice= notice
 				.alert= alert
-			#account
-				- if user_signed_in?
-					Signed in as #{current_user.email}. Not you?
-					= link_to "Sign out", destroy_user_session_path
-				- else
-					= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 			#content= yield

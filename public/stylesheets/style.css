@@ -10,6 +10,12 @@ body {
 	color: #222;
 }
 
+#account {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
 h1#header {
 	color: #282828;
 	font-family: Arvo;
