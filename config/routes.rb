@@ -65,7 +65,8 @@ Typr::Application.routes.draw do
   match "/profiles" => "profiles#index"
   match "/profiles/:id" => 'profiles#view'
   
-  match "/history" => "history#index"
+  match "/account/history" => "account#history"
+  match "/account/settings" => "account#settings"
 
   # See how all your routes lay out with "rake routes"
 

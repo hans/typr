@@ -14,8 +14,11 @@
 	%body
 		%h1#header= link_to 'typr', '/'
 		%ul#nav
-			%li= link_to 'Practice', '/type/practice'
-			%li= link_to 'History', '/history'
+			- if user_signed_in?
+				%li= link_to 'Compete', '/type/compete'
+				%li= link_to 'Practice', '/type/practice'
+				%li= link_to 'History', '/account/history'
+				%li= link_to 'Settings', '/account'
 		#container
 			#flash
 				.notice= notice
@@ -25,9 +28,5 @@
 					Signed in as #{current_user.email}. Not you?
 					= link_to "Sign out", destroy_user_session_path
 				- else
-					= link_to "Sign up", new_user_registration_path
-					or
-					= link_to "Sign in", new_user_session_path
-					or
 					= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 			#content= yield
