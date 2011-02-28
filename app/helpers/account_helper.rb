@@ -1,2 +1,2 @@
-module HistoryHelper
+module AccountHelper
 end
