@@ -91,7 +91,12 @@ function highlight_leader() {
 		return room.players[b].cur_word_idx - room.players[a].cur_word_idx
 	})
 	
-	if ( sorted_players[0].id != player_id ) {
+	// highlight the leader in red.
+	// if the current user is the leader, highlight the user in second place
+	if ( sorted_players[0].id == player_id && sorted_players[1] != undefined ) {
+		words.removeClass('leader-highlight')
+		$(words[room.players[sorted_players[1]].cur_word_idx]).addClass('leader-highlight')
+	} else {
 		words.removeClass('leader-highlight')
 		$(words[room.players[sorted_players[0]].cur_word_idx]).addClass('leader-highlight')
 	}
