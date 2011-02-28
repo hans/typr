@@ -13,6 +13,9 @@
 		= csrf_meta_tag
 	%body
 		%h1#header= link_to 'typr', '/'
+		%ul#nav
+			%li= link_to 'Practice', '/type/practice'
+			%li= link_to 'History', '/history'
 		#container
 			#flash
 				.notice= notice
