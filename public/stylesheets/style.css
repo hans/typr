@@ -34,6 +34,22 @@ h2 {
 	margin: 50px auto;
 }
 
+#content ul#nav {
+	list-style: none;
+}
+
+#content ul#nav li {
+	display: inline;
+}
+
+#content ul#nav li:before {
+	content: " | ";
+}
+
+#content ul#nav li:first-child:before {
+	content: "";
+}
+
 #copy, #note {
 	font-family: Vollkorn;
 }
