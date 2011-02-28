@@ -103,13 +103,16 @@ function highlight_leader() {
 }
 
 function init_pollers() {
-	server_poll = setInterval(poll_server, 3000)
+	server_poll = setInterval(poll_server, 2000)
 }
 
 function poll_server() {
 	if ( start_time == null ) {
 		var time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
 		show_countdown(Math.round(time_before_start))
+		
+		// hack - get this code to re-run every one second until things get started
+		setTimeout(poll_server, 1000)
 		
 		if ( time_before_start < 0 )
 			start()
