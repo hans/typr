@@ -1,6 +1,8 @@
 # coding: utf-8
 
 class TypeController < ApplicationController
+  before_filter :authenticate_user!
+  
   def compete
     @page_scripts = ['jquery-ui.min', 'type/compete', 'type']
     @page_styles = ['jquery-ui']
