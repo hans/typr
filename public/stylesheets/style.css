@@ -29,25 +29,30 @@ h2 {
 	font-weight: normal;
 }
 
-#container {
-	width: 700px;
-	margin: 50px auto;
-}
-
-#content ul#nav {
+ul#nav {
 	list-style: none;
 }
 
-#content ul#nav li {
+ul#nav li {
 	display: inline;
 }
 
-#content ul#nav li:before {
+ul#nav li:before {
 	content: " | ";
 }
 
-#content ul#nav li:first-child:before {
+ul#nav li:first-child:before {
 	content: "";
+}
+
+ul#nav li a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+#container {
+	width: 700px;
+	margin: 50px auto;
 }
 
 #copy, #note {
