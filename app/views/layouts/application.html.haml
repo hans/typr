@@ -26,7 +26,8 @@
 				%li= link_to 'History', '/account/history'
 				%li= link_to 'Settings', '/account'
 		#container
-			#flash
-				.notice= notice
-				.alert= alert
-			#content= yield
+			#inner
+				#flash
+					.notice= notice
+					.alert= alert
+				#content= yield

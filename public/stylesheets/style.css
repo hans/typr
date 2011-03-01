@@ -5,6 +5,8 @@
 body {
 	margin: 0;
 	padding: 0;
+	height: 100%;
+	background-color: #ccc;
 	font-family: Georgia, 'Times New Roman', serif;
 	font-size: 15px;
 	color: #222;
@@ -24,6 +26,7 @@ h1#header {
 	letter-spacing: -2px;
 	text-align: center;
 	text-shadow: 0 0 4px #666;
+	margin-bottom: 50px;
 }
 
 h1#header a {
@@ -62,7 +65,20 @@ ul#nav li a {
 }
 
 #container {
+	padding-top: 1px;
+	height: 100%;
+	height: auto !important;
+	background-color: #fafafa;
+	box-shadow: 0 0 20px #888;
+	-webkit-box-shadow: 0 0 20px #888;
+	-moz-box-shadow: 0 0 20px #888;
+	border-top: 1px solid #777;
+}
+
+#inner {
 	width: 700px;
+	height: 100%;
+	height: auto !important;
 	margin: 50px auto;
 }
 
