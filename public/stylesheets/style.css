@@ -23,6 +23,7 @@ h1#header {
 	font-weight: normal;
 	letter-spacing: -2px;
 	text-align: center;
+	text-shadow: 0 0 4px #666;
 }
 
 h1#header a {
