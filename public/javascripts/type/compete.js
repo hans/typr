@@ -34,7 +34,6 @@ function find_room() {
 		})
 		
 		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
-		poll = setInterval(eval_next_in_queue, 30)
 		init_pollers()
 	}, 'json')
 }
@@ -104,6 +103,7 @@ function highlight_leader() {
 
 function init_pollers() {
 	server_poll = setInterval(poll_server, 2000)
+	poll = setInterval(eval_next_in_queue, 30)
 }
 
 function poll_server() {
