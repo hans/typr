@@ -58,8 +58,8 @@ function prepare_copy(words_arr, note) {
 }
 
 function eval_next_in_queue() {
-	console.log('eval-next')
 	if ( check_queue.length == 0 ) return;
+	console.log('found something')
 	
 	var code = check_queue.shift()
 	var typed_text = type_area.val().split(' ')[0]
