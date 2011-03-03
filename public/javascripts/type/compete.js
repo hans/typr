@@ -111,11 +111,11 @@ function poll_server() {
 		var time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
 		show_countdown(Math.round(time_before_start))
 		
-		// hack - get this code to re-run every one second until things get started
-		setTimeout(poll_server, 1000)
-		
 		if ( time_before_start < 0 )
 			start()
+		else
+			// hack - get this code to re-run every one second until things get started
+			setTimeout(poll_server, 1000)
 		return
 	}
 	
