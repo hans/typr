@@ -9,6 +9,7 @@ gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 
 gem 'jquery-rails'
+gem 'rails3-jquery-autocomplete'
 
 gem 'redis'
 

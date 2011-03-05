@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, :except => [:view]
+  autocomplete :profile, :keyboard
   
   def view
     @profile = Profile.find params[:id]

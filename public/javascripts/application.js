@@ -16,7 +16,8 @@ $(document).ready(function() {
 		var layout_select = '<select name="new_profile_layout" id="new_profile_layout"><option name="QWERTY">QWERTY</option><option name="Dvorak">Dvorak</option><option name="Colemak">Colemak</option></select>'
 		row.find('td:first').html(layout_select)
 		
-		var keyboard_input = '<input type="text" name="new_profile_keyboard" id="new_profile_keyboard" />'
+		var keyboard_input = $('<input type="text" name="new_profile_keyboard" id="new_profile_keyboard" data-autocomplete="/profiles/autocomplete_profile_keyboard" />')
+		keyboard_input.railsAutocomplete();
 		row.find('td:eq(1)').html(keyboard_input)
 		
 		var save_link = '<a href="javascript: void 0;" id="save_row">Save</a>'

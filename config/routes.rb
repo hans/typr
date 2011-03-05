@@ -65,6 +65,7 @@ Typr::Application.routes.draw do
   match "/profiles" => "profiles#index"
   match "/profiles/save" => "profiles#save"
   match "/profiles/delete" => "profiles#delete"
+  get "profiles/autocomplete_profile_keyboard"
   match "/profiles/:id" => 'profiles#view'
   
   match "/account/history" => "account#history"
