@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110227033401) do
+ActiveRecord::Schema.define(:version => 20110305172047) do
 
   create_table "copies", :force => true do |t|
     t.integer  "category"
@@ -27,13 +27,18 @@ ActiveRecord::Schema.define(:version => 20110227033401) do
     t.datetime "updated_at"
   end
 
+  create_table "profiles_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "profile_id"
+  end
+
   create_table "records", :force => true do |t|
     t.integer  "user_id"
     t.integer  "profile_id"
     t.integer  "words"
-    t.integer  "duration"
-    t.integer  "wpm"
-    t.integer  "cpm"
+    t.float    "duration"
+    t.float    "wpm"
+    t.float    "cpm"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20110227033401) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "default_profile_id",                  :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
