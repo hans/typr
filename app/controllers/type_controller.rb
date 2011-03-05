@@ -70,12 +70,10 @@ class TypeController < ApplicationController
   
   respond_to :json
   def submit
-    @record = Record.create :duration => params[:duration], :words => params[:words], :wpm => params[:wpm], :cpm => params[:cpm]
-    @record.user = current_user
-    @record.profile_id = current_user.default_profile_id || Profile.find(:first, :layout => "QWERTY", :keyboard => "Unknown Keyboard").id
-    @record.save
+    profile_id = session[:profile_id] || 1
+    record = Record.create :duration => params[:duration], :words => params[:words], :wpm => params[:wpm], :cpm => params[:cpm], :user => current_user, :profile_id => profile_id
     
-    render :json => ( @record ? true : false )
+    render :json => ( record ? true : false )
   end
   
   def record_url something
