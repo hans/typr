@@ -9,6 +9,8 @@ room = null
 server_poll = null
 first_poll = true
 
+server_started = false
+
 function prepare() {
 	countdown_el = $('#countdown')
 	find_room()
@@ -111,11 +113,14 @@ function poll_server() {
 		var time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
 		show_countdown(Math.round(time_before_start))
 		
-		if ( time_before_start < 0 )
+		if ( !server_started && time_before_start < 0 ) {
+			server_started = true;
 			start()
-		else
+		} else {
 			// hack - get this code to re-run every one second until things get started
 			setTimeout(poll_server, 1000)
+		}
+		
 		return
 	}
 	
