@@ -11,8 +11,9 @@
 			%td= r.user.email
 			- unless defined?(hide_profile)
 				%td.profile
-					= r.profile.layout
-					%strong= r.profile.keyboard
+					= link_to :controller => 'profiles', :action => 'view', :id => r.profile.id do
+						= r.profile.layout
+						%strong= r.profile.keyboard
 			%td= r.wpm
 			%td= r.cpm
 			%td= time_ago_in_words(r.created_at) + " ago"

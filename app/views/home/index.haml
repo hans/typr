@@ -10,7 +10,10 @@
 		%th Average CPM
 	- @top_profiles.each do |p|
 		%tr
-			%td= link_to p[0].layout + " / " + p[0].keyboard, :controller => 'profiles', :action => 'view', :id => p[0].id
+			%td.profile
+				= link_to :controller => 'profiles', :action => 'view', :id => p[0].id do
+					= p[0].layout
+					%strong= p[0].keyboard
 			%td= p[1]
 			%td= p[2].round
 			%td= p[3].round

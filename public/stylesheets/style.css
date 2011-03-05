@@ -19,6 +19,16 @@ body {
 	font: 13px/18px 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
 }
 
+a {
+	font-weight: bold;
+	color: #222;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #555;
+}
+
 #account {
 	position: absolute;
 	top: 5px;
@@ -29,7 +39,7 @@ h1#header {
 	color: #282828;
 	font-family: Ubuntu;
 	font-size: 50px;
-	font-weight: normal;
+	font-weight: bold;
 	letter-spacing: -2px;
 	text-align: center;
 	text-shadow: 0 0 4px #666;
@@ -39,6 +49,10 @@ h1#header {
 h1#header a {
 	color: inherit;
 	text-decoration: inherit;
+}
+
+h1#header a:hover {
+	color: #5b5b5b;
 }
 
 h2, h3 {
@@ -79,9 +93,9 @@ table tr th:last-child {
 ul#nav {
 	list-style: none;
 	text-align: center;
+	color: #777;
 	
-	margin: 0;
-	padding: 0;
+	margin-bottom: 20px;
 }
 
 ul#nav li {
@@ -94,10 +108,6 @@ ul#nav li:before {
 
 ul#nav li:first-child:before {
 	content: "";
-}
-
-ul#nav li a {
-	color: inherit;
 }
 
 #container {
@@ -199,13 +209,22 @@ tr.header {
 	background-color: #eee;
 }
 
-td.profile {
+td.profile, td.profile a {
 	color: #aaa;
+	text-decoration: none;
+}
+
+td.profile:hover {
+	color: #ddd;
 }
 
 td.profile strong {
 	display: block;
 	color: #222;
+}
+
+td.profile strong:hover {
+	color: #555;
 }
 
 .chart {
