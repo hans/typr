@@ -18,6 +18,7 @@ check_queue = []
 
 // stores the interval timer so that polling can stop once typing finishes
 poll = null
+stats_poll = null
 
 // prevent continuous flashing when a typing error occurs
 // (since the polling function would keep noticing the error until it was fixed)
@@ -108,6 +109,7 @@ function done() {
 	is_done = true
 	
 	clearInterval(poll)
+	clearInterval(stats_poll)
 	
 	end_time = new Date()
 	type_area.css('background-color', '#6fbf4d')

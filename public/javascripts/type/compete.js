@@ -106,6 +106,7 @@ function highlight_leader() {
 function init_pollers() {
 	server_poll = setInterval(poll_server, 2000)
 	poll = setInterval(eval_next_in_queue, 30)
+	stats_poll = setInterval(calculate_stats, 500)
 }
 
 function poll_server() {
@@ -129,7 +130,6 @@ function poll_server() {
 		return
 	}
 	
-	stats = calculate_stats()
 	url = '/type/compete/room/' + room['id'] + '/' + player_id
 	$.post(url, {
 		player_id: player_id,

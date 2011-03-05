@@ -4,7 +4,9 @@ function prepare() {
 		split = copy['copy']['content'].split(' ')
 		prepare_copy(split, copy['copy']['note'])
 		add_key_listener()
+		
 		poll = setInterval(eval_next_in_queue, 30)
+		stats_poll = setInterval(calculate_stats, 500)
 	}, 'json')
 }
 
