@@ -64,6 +64,7 @@ h2, h3 {
 
 table, tr, td {
 	border: none;
+	text-align: center;
 }
 
 table {
@@ -214,6 +215,7 @@ tr.header {
 }
 
 td.profile, td.profile a {
+	text-align: left;
 	color: #aaa;
 	text-decoration: none;
 	font-weight: normal;
