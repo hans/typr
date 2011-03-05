@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :records, :dependent => :destroy
-  has_one :profile, :foreign_key => :default_profile_id
+  has_and_belongs_to_many :profiles
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, and :timeoutable
@@ -9,6 +9,18 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+  
+  # Insert a default profile association on registration
+  after_create :insert_default_profile
+  
+  # Insert a default profile association
+  # Profile #1 = QWERTY / Unknown Keyboard
+  #
+  # This can be changed later by the user, but it needs to be set
+  # so that records can be stored correctly
+  def insert_default_profile
+    self.profiles << Profile.find(1)
+  end
   
   def self.new_with_session params, session
     super.tap do |user|

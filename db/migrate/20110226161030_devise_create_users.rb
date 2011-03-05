@@ -10,8 +10,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.confirmable
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
-      
-      t.integer :default_profile_id
 
       t.timestamps
     end
