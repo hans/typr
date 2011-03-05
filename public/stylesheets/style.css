@@ -212,6 +212,7 @@ tr.header {
 td.profile, td.profile a {
 	color: #aaa;
 	text-decoration: none;
+	font-weight: normal;
 }
 
 td.profile:hover {
