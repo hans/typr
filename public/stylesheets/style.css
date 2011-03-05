@@ -1,15 +1,22 @@
-@import url('http://fonts.googleapis.com/css?family=Arvo');
 @import url('http://fonts.googleapis.com/css?family=Droid%20Serif');
+@import url('http://fonts.googleapis.com/css?family=Ubuntu');
 @import url('http://fonts.googleapis.com/css?family=Vollkorn');
+
+/**********
+ * global *
+ **********/
+* {
+	margin: 0;
+	padding: 0;
+}
 
 body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	background-color: #ccc;
-	font-family: Georgia, 'Times New Roman', serif;
-	font-size: 15px;
 	color: #222;
+	font: 13px/18px 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
 }
 
 #account {
@@ -20,13 +27,13 @@ body {
 
 h1#header {
 	color: #282828;
-	font-family: Arvo;
+	font-family: Ubuntu;
 	font-size: 50px;
 	font-weight: normal;
 	letter-spacing: -2px;
 	text-align: center;
 	text-shadow: 0 0 4px #666;
-	margin-bottom: 50px;
+	margin: 50px 0;
 }
 
 h1#header a {
@@ -34,10 +41,39 @@ h1#header a {
 	text-decoration: inherit;
 }
 
-h2 {
+h2, h3 {
 	color: #1b1b1b;
-	font-family: Arvo;
+	font-family: Ubuntu;
 	font-weight: normal;
+	margin: 25px 0 15px 0;
+}
+
+table, tr, td {
+	border: none;
+}
+
+td, th {
+	padding: 5px 5px;
+}
+
+tr td {
+	border-bottom: 1px solid #ddd;
+}
+
+tr:last-child td {
+	border: none;
+}
+
+table tr th:first-child {
+	border-top-left-radius: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-top-left-radius: 10px;
+}
+
+table tr th:last-child {
+	border-top-right-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-top-right-radius: 10px;
 }
 
 ul#nav {
@@ -75,6 +111,9 @@ ul#nav li a {
 	border-top: 1px solid #777;
 }
 
+/********
+ * type *
+ ********/
 #inner {
 	width: 700px;
 	height: 100%;
@@ -151,6 +190,22 @@ table#results th {
 	font-variant: small-caps;
 	font-weight: normal;
 	color: #ccc;
+}
+
+/*******
+ * etc *
+ *******/
+tr.header {
+	background-color: #eee;
+}
+
+td.profile {
+	color: #aaa;
+}
+
+td.profile strong {
+	display: block;
+	color: #222;
 }
 
 .chart {
