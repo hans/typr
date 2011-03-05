@@ -63,6 +63,8 @@ Typr::Application.routes.draw do
   match "/type/submit" => "type#submit"
   
   match "/profiles" => "profiles#index"
+  match "/profiles/save" => "profiles#save"
+  match "/profiles/delete" => "profiles#delete"
   match "/profiles/:id" => 'profiles#view'
   
   match "/account/history" => "account#history"

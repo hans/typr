@@ -27,6 +27,24 @@
 
 	%p= f.submit "Update"
 
+%h2 Profiles
+%p Profile explanation goes here
+%table
+	%tr
+		%th Layout
+		%th Keyboard
+		%th
+	- resource.profiles.each do |profile|
+		%tr{:id => profile.id}
+			%td= profile.layout
+			%td= profile.keyboard
+			%td
+				%a{:href => 'javascript: void 0', :class => 'delete_row'} Delete
+	%tr
+		%td
+		%td
+		%td= link_to 'Add', 'javascript: void 0;', :id => 'add_row'
+
 %h3 Cancel my account
 
 %p
