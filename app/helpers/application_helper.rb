@@ -5,3 +5,9 @@ module ApplicationHelper
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=40"
   end
 end
+
+class String
+  def provider_titleize
+    ( self == 'open_id' ? 'OpenID' : self.titleize )
+  end
+end

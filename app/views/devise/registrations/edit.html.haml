@@ -1,24 +1,35 @@
 - @page_scripts = ['jquery-ui.min', 'autocomplete-rails']
 - @page_styles = ['jquery-ui']
 
-%h2 Edit #{resource_name.to_s.humanize}
+%h2 Edit User
 
-- form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
 	= devise_error_messages!
 
 	%p
 		= f.label :email
 		%br
 		= f.email_field :email
-
+	
 	%p
-		= f.label :password
-		%i (leave blank if you don't want to change it)
+		= f.label :username
+		%br
+		= f.text_field :username
+	
+	%p= f.submit "Update"
+
+%h2 Change Password
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+	= devise_error_messages!
+	
+	%p
+		= f.label :password, 'New password'
 		%br
 		= f.password_field :password
 
 	%p
-		= f.label :password_confirmation
+		= f.label :password_confirmation, 'New password confirmation'
 		%br
 		= f.password_field :password_confirmation
 
@@ -28,7 +39,7 @@
 		%br
 		= f.password_field :current_password
 
-	%p= f.submit "Update"
+	%p= f.submit "Change password"
 
 %h2 Profiles
 %p Profile explanation goes here
@@ -48,7 +59,23 @@
 		%td
 		%td= link_to 'Add', 'javascript: void 0;', :id => 'add_row'
 
-%h3 Cancel my account
+%h2 Authentications
+
+- unless resource.authentications.empty?
+	%p You can sign into this account using:
+	#authentications
+		- resource.authentications.each do |auth|
+			.authentication
+				= image_tag "#{auth.provider}_32.png", :size => "32x32"
+				.provider= auth.provider.titleize
+				.uid= auth.uid
+%p Add another service to sign in with:
+- %w[twitter facebook google_apps open_id github].each do |prov|
+	= link_to "/auth/#{prov}" do
+		= image_tag "#{prov}_64.png", :size => "64x64", :alt => prov.titleize
+		= prov.titleize
+
+%h2 Cancel my account
 
 %p
 	Unhappy?

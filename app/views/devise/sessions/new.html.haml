@@ -1,22 +1,8 @@
 %h2 Sign in
 
-- form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-	%p
-		= f.label :email
-		%br
-		= f.email_field :email
+%p Sign in using a service below.
 
-	%p
-		= f.label :password
-		%br
-		= f.password_field :password
-
-	- if devise_mapping.rememberable?
-		%p
-			= f.check_box :remember_me
-			&nbsp;
-			= f.label :remember_me
-
-	%p= f.submit "Sign in"
-
-= render :partial => "devise/shared/links"
+- %w[twitter facebook open_id github].each do |prov|
+	= link_to omniauth_authorize_path(resource, prov) do
+		= image_tag "#{prov}_64.png", :size => "64x64", :alt => prov.provider_titleize
+		= prov.provider_titleize
