@@ -62,34 +62,34 @@ h2, h3 {
 	margin: 25px 0 15px 0;
 }
 
-table, tr, td {
+table.table, table.table tr, table.table td {
 	border: none;
 	text-align: center;
 }
 
-table {
+table.table {
 	width: 100%;
 }
 
-td, th {
+table.table td, table.table th {
 	padding: 5px 5px;
 }
 
-tr td {
+table.table tr td {
 	border-bottom: 1px solid #ddd;
 }
 
-tr:last-child td {
+table.table tr:last-child td {
 	border: none;
 }
 
-table tr th:first-child {
+table.table tr th:first-child {
 	border-top-left-radius: 10px;
 	-webkit-border-top-left-radius: 10px;
 	-moz-border-top-left-radius: 10px;
 }
 
-table tr th:last-child {
+table.table tr th:last-child {
 	border-top-right-radius: 10px;
 	-webkit-border-top-right-radius: 10px;
 	-moz-border-top-right-radius: 10px;
@@ -215,7 +215,7 @@ tr.header {
 }
 
 td.profile, td.profile a {
-	text-align: left;
+	text-align: left !important;
 	color: #aaa;
 	text-decoration: none;
 	font-weight: normal;
