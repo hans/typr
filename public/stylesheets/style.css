@@ -118,12 +118,19 @@ ul#nav li:first-child:before {
 #container {
 	padding-top: 1px;
 	height: 100%;
-	height: auto !important;
 	background-color: #fafafa;
 	box-shadow: 0 0 20px #888;
 	-webkit-box-shadow: 0 0 20px #888;
 	-moz-box-shadow: 0 0 20px #888;
 	border-top: 1px solid #777;
+}
+
+#footer {
+	font-size: 12px;
+	text-align: center;
+	padding: 75px 0 30px 0;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
 }
 
 /********
