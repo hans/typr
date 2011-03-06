@@ -128,7 +128,12 @@ ul#nav li:first-child:before {
 #footer {
 	font-size: 12px;
 	text-align: center;
-	padding: 75px 0 30px 0;
+	
+	margin-top: 70px;
+	padding: 45px 0 30px 0;
+	
+	border-top: 1px solid #ddd;
+	
 	opacity: 0.5;
 	filter: alpha(opacity=50);
 }
