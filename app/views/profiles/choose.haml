@@ -1,4 +1,8 @@
 %h2.center Please choose a keyboard profile for this typing session.
+%p.center
+	You can associate other typing profiles with your account on the 
+	= link_to 'Settings page', :controller => 'devise/registrations', :action => 'edit'
+	\.
 = form_tag({}, :class => 'center') do
 	%br
 	= select_tag :profile_id, options_for_select(@profiles.map { |p| [p.name, p.id] })
