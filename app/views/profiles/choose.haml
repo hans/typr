@@ -1,0 +1,7 @@
+%h2.center Please choose a keyboard profile for this typing session.
+= form_tag({}, :class => 'center') do
+	%br
+	= select_tag :profile_id, options_for_select(@profiles.map { |p| [p.name, p.id] })
+	%br
+	%br
+	= submit_tag 'Continue'

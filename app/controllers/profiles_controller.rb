@@ -32,7 +32,22 @@ class ProfilesController < ApplicationController
   respond_to :json
   def delete
     current_user.profiles.delete Profile.find(params[:id])
-    respond_with true
+    render :json => true
+  end
+  
+  def choose
+    if params[:profile_id] and params[:type]
+      p params[:profile_id], params[:type]
+      session[:profile_id] = params[:profile_id]
+      
+      if params[:type] == 'practice'
+        redirect_to :controller => 'type', :action => 'practice'
+      elsif params[:type] == 'compete'
+        redirect_to :controller => 'type', :action => 'compete'
+      end
+    else
+      @profiles = current_user.profiles
+    end
   end
   
   def profile_url something

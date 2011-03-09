@@ -138,6 +138,10 @@ ul#nav li:first-child:before {
 	filter: alpha(opacity=50);
 }
 
+.center {
+	text-align: center;
+}
+
 /********
  * type *
  ********/

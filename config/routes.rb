@@ -63,6 +63,7 @@ Typr::Application.routes.draw do
   match "/type/submit" => "type#submit"
   
   match "/profiles" => "profiles#index"
+  match "/profiles/choose/:type" => "profiles#choose"
   match "/profiles/save" => "profiles#save"
   match "/profiles/delete" => "profiles#delete"
   get "profiles/autocomplete_profile_keyboard"
