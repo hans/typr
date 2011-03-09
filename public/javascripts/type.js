@@ -58,6 +58,10 @@ function prepare_copy(words_arr, note) {
 	next_word()
 }
 
+function hide_notifications() {
+	$('.notification').css('visibility', 'hidden')
+}
+
 function eval_next_in_queue() {
 	if ( check_queue.length == 0 ) return;
 	

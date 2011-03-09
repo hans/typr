@@ -1,0 +1,9 @@
+%p.center.notification
+	This record will be saved with the profile 
+	%strong= current_profile.name
+	\.
+	%br
+	Want to 
+	= link_to 'choose a different profile', "/profiles/choose/#{params[:action]}"
+	?
+%br

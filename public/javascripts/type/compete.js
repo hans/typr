@@ -42,6 +42,7 @@ function find_room() {
 
 function start() {
 	$.get('/type/compete/room/' + room.id + '/start', null, function(data) {
+		hide_notifications()
 		start_time = new Date()
 		add_key_listener()
 	})

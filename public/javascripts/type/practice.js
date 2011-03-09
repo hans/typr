@@ -10,11 +10,16 @@ function prepare() {
 	}, 'json')
 }
 
+function start() {
+	hide_notifications()
+	start_time = new Date()
+}
+
 // set up a key listener that tracks the start time and appends to a key-check queue
 function add_key_listener() {
 	type_area.keyup(function(event) {
 		can_show_error = true
-		if ( start_time == null ) start_time = new Date()
+		if ( start_time == null ) start()
 		
 		check_queue.push(event.keyCode)
 	})
