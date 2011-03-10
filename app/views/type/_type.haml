@@ -1,6 +1,6 @@
 #copy
 #note
-%input#type_area{:type => 'text', :name => 'type_area', :value => ''}
+%input#type_area{:type => 'text', :name => 'type_area', :value => '', :disabled => ( '' if params[:action] == 'compete' )}
 %table#results
 	%tr
 		%td#results-wpm 0
