@@ -7,8 +7,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       current_user.save
       
       render :action => 'edit', :resource => current_user
-    when 'change_password'
-      super
     end
   end
 end
