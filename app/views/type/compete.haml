@@ -1,6 +1,6 @@
 :javascript
 	player_id = #{current_user.id}
-	player_name = '#{current_user.email}'
+	player_name = '#{current_user.username}'
 = render :partial => 'profile_notice'
 %table.stats
 = render :partial => 'type'

@@ -10,7 +10,7 @@
 		%tr
 			%td
 				%img{:src => gravatar_url(r.user)}
-			%td= r.user.email
+			%td= r.user.username
 			- unless defined?(hide_profile)
 				%td.profile
 					= link_to :controller => 'profiles', :action => 'view', :id => r.profile.id do

@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
   # Insert a default profile association on registration
   after_create :insert_default_profile
   
+  def username
+    read_attribute(:username) || self.email
+  end
+  
   # Insert a default profile association
   # Profile #1 = QWERTY / Unknown Keyboard
   #
