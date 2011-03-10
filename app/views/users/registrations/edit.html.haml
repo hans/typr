@@ -48,10 +48,7 @@
 				.provider= auth.provider.titleize
 				.uid= auth.uid
 %p Add another service to sign in with:
-- %w[facebook open_id github].each do |prov|
-	= link_to "/auth/#{prov}" do
-		= image_tag "#{prov}_64.png", :size => "64x64", :alt => prov.titleize
-		= prov.titleize
+= render :partial => 'shared/oauth_provider_links'
 
 %h2 Cancel my account
 
