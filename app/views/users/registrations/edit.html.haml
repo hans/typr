@@ -3,7 +3,7 @@
 
 %h2 Edit User
 
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= form_for(current_user, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
 	= devise_error_messages!
 
 	%p
@@ -16,11 +16,12 @@
 		%br
 		= f.text_field :username
 	
+	%input{:type => 'hidden', :name => 'form_type', :value => 'edit_user'}
 	%p= f.submit "Update"
 
 %h2 Change Password
 
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= form_for(current_user, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
 	= devise_error_messages!
 	
 	%p
@@ -39,6 +40,7 @@
 		%br
 		= f.password_field :current_password
 
+	%input{:type => 'hidden', :name => 'form_type', :value => 'change_password'}
 	%p= f.submit "Change password"
 
 %h2 Profiles
@@ -48,7 +50,7 @@
 		%th Layout
 		%th Keyboard
 		%th
-	- resource.profiles.each do |profile|
+	- current_user.profiles.each do |profile|
 		%tr{:id => profile.id}
 			%td= profile.layout
 			%td= profile.keyboard
@@ -61,16 +63,16 @@
 
 %h2 Authentications
 
-- unless resource.authentications.empty?
+- unless current_user.authentications.empty?
 	%p You can sign into this account using:
 	#authentications
-		- resource.authentications.each do |auth|
+		- current_user.authentications.each do |auth|
 			.authentication
 				= image_tag "#{auth.provider}_32.png", :size => "32x32"
 				.provider= auth.provider.titleize
 				.uid= auth.uid
 %p Add another service to sign in with:
-- %w[twitter facebook google_apps open_id github].each do |prov|
+- %w[facebook open_id github].each do |prov|
 	= link_to "/auth/#{prov}" do
 		= image_tag "#{prov}_64.png", :size => "64x64", :alt => prov.titleize
 		= prov.titleize
