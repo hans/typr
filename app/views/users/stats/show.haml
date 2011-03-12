@@ -1,0 +1,29 @@
+%img{:src => gravatar_url(@user) }
+%h2= @user.username
+%table.table
+	%tr
+		%th Average WPM
+		%td= @user.average_stat :wpm
+	%tr
+		%th Average CPM
+		%td= @user.average_stat :cpm
+:javascript
+	$(document).ready(function() {
+		options = {
+			series: {
+				lines: { show: true },
+				points: { show: true }
+			},
+			xaxis: {
+				mode: 'time'
+			}
+		}
+		$.plot('#wpm_chart_container', #{@wpm.to_json}, options)
+		$.plot('#cpm_chart_container', #{@cpm.to_json}, options)
+	})
+
+%h2.center WPM History
+#wpm_chart_container.chart
+
+%h2.center CPM History
+#cpm_chart_container.chart

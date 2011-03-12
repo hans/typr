@@ -17,6 +17,13 @@ class User < ActiveRecord::Base
   # Insert a default profile association on registration
   after_create :insert_default_profile
   
+  def average_stat stat
+    nil unless stat == :wpm or stat == :cpm
+    
+    0 if self.records.length == 0
+    self.records.collect(&stat).sum.to_f / self.records.length
+  end
+  
   def username
     read_attribute(:username) || self.email
   end

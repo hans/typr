@@ -9,8 +9,9 @@
 	- records.each do |r|
 		%tr
 			%td
-				%img{:src => gravatar_url(r.user)}
-			%td= r.user.username
+				= link_to "/users/#{r.user.id}" do
+					%img{:src => gravatar_url(r.user)}
+			%td= link_to r.user.username, "/users/#{r.user.id}"
 			- unless defined?(hide_profile)
 				%td.profile
 					= link_to :controller => 'profiles', :action => 'view', :id => r.profile.id do
