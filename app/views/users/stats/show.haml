@@ -2,11 +2,20 @@
 %h2= @user.username
 %table.table
 	%tr
-		%th Average WPM
-		%td= @user.average_stat :wpm
+		%th
+		%th Minimum
+		%th Maximum
+		%th Average
 	%tr
-		%th Average CPM
-		%td= @user.average_stat :cpm
+		%th WPM
+		%td= @user.find_stat :min, :wpm
+		%td= @user.find_stat :max, :wpm
+		%td= @user.find_stat :avg, :wpm
+	%tr
+		%th CPM
+		%td= @user.find_stat :min, :cpm
+		%td= @user.find_stat :max, :cpm
+		%td= @user.find_stat :avg, :cpm
 :javascript
 	$(document).ready(function() {
 		options = {

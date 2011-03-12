@@ -17,11 +17,16 @@ class User < ActiveRecord::Base
   # Insert a default profile association on registration
   after_create :insert_default_profile
   
-  def average_stat stat
-    nil unless stat == :wpm or stat == :cpm
+  def find_stat stat_name, stat_key
+    return nil unless stat_name == :min or stat_name == :max or stat_name == :avg
+    return nil unless stat_key == :wpm or stat_key == :cpm
     
-    0 if self.records.length == 0
-    self.records.collect(&stat).sum.to_f / self.records.length
+    return 0 if self.records.length == 0
+    stat_values = self.records.collect(&stat_key)
+    
+    return stat_values.min if stat_name == :min
+    return stat_values.max if stat_name == :max
+    return stat_values.sum.to_f / stat_values.length if stat_name == :avg
   end
   
   def username
