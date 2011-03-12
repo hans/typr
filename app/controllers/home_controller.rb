@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
   def index
-    @top_records = Record.find :all, :order => 'wpm desc'
+    @top_records = Record.find :all, :order => 'wpm desc', :limit => 5
     
     top_profile_ids = Record.find :all, :group => 'profile_id', :order => 'num_records desc',
-      :select => 'count(1) as num_records, profile_id, avg(wpm) as avg_wpm, avg(cpm) as avg_cpm'
+      :select => 'count(1) as num_records, profile_id, avg(wpm) as avg_wpm, avg(cpm) as avg_cpm', :limit => 5
     @top_profiles = []
     
     top_profile_ids.each do |profile|
