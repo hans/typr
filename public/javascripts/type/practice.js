@@ -1,26 +1,33 @@
-// convert plain-text copy to something we can highlight more easily
-function prepare() {
-	$.get('/type/copy/' + copy_category, null, function(copy) {
-		split = copy['copy']['content'].split(' ')
-		prepare_copy(split, copy['copy']['note'])
-		add_key_listener()
-		
-		poll = setInterval(eval_next_in_queue, 30)
-		stats_poll = setInterval(calculate_stats, 500)
-	}, 'json')
-}
-
-function start() {
-	hide_notifications()
-	start_time = new Date()
-}
-
-// set up a key listener that tracks the start time and appends to a key-check queue
-function add_key_listener() {
-	type_area.keyup(function(event) {
-		can_show_error = true
-		if ( start_time == null ) start()
-		
-		check_queue.push(event.keyCode)
-	})
-}
+(function() {
+  var Game;
+  Game = (function() {
+    var add_key_listener, prepare, start;
+    function Game() {}
+    prepare = function() {
+      return $.get("/type/copy/" + copy_category, null, function(copy) {
+        var poll, split, stats_poll;
+        split = copy['copy']['content'].split(' ');
+        this.parent.prepare_copy(split, copy['copy']['note']);
+        add_key_listener();
+        poll = setInterval(eval_next_in_queue, 30);
+        return stats_poll = setInterval(calculate_stats, 500);
+      }, 'json');
+    };
+    start = function() {
+      var start_time;
+      this.parent.hide_notifications();
+      return start_time = new Date();
+    };
+    add_key_listener = function() {
+      return type_area.keyup(function(event) {
+        var can_show_error;
+        can_show_error = true;
+        if (typeof start_time == "undefined" || start_time === null) {
+          this.parent.start();
+        }
+        return check_queue.push(event.keyCode);
+      });
+    };
+    return Game;
+  })();
+}).call(this);
