@@ -11,6 +11,8 @@ gem 'ruby-openid'
 gem 'htmltokenizer'
 gem 'ruby-hmac'
 
+gem 'coffee-script'
+gem 'coffee-script-source'
 gem 'jquery-rails'
 gem 'rails3-jquery-autocomplete'
 
