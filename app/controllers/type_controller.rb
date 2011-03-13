@@ -4,7 +4,7 @@ class TypeController < ApplicationController
   before_filter :authenticate_user!
   
   def compete
-    redirect_to :controller => 'profiles', :action => 'choose' if session[:profile_id].nil?
+    redirect_to "/profiles/choose/compete" if session[:profile_id].nil?
     @page_scripts = ['jquery-ui.min', 'type/compete', 'type']
     @page_styles = ['jquery-ui']
   end
@@ -58,7 +58,7 @@ class TypeController < ApplicationController
   end
   
   def practice
-    redirect_to :controller => 'profiles', :action => 'choose' if session[:profile_id].nil?
+    redirect_to "/profiles/choose/practice" if session[:profile_id].nil?
     @page_scripts = ['type/practice', 'type']
   end
   
