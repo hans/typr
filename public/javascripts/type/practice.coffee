@@ -4,7 +4,8 @@ class Practice
 	# convert plain-text copy to something we can highlight more easily
 	prepare: ->
 		window.foo = @parent
-		$.get "/type/copy/#{@parent.copy_category}", null, (copy) ->
+		console.log(@parent, @parent.prepare_copy)
+		$.get "/type/copy/#{@parent.copy_category}", null, (copy) =>
 			split = copy['copy']['content'].split ' '
 			@parent.prepare_copy split, copy['copy']['note']
 			add_key_listener()
@@ -15,12 +16,12 @@ class Practice
 
 	start: ->
 		@parent.hide_notifications()
-		start_time = new Date()
+		@parent.start_time = new Date()
 
 	# set up a key listener that tracks the start time and appends to a key-check queue
 	add_key_listener: ->
 		type_area.keyup (event) ->
-			can_show_error = true
-			@parent.start() unless start_time?
+			@parent.can_show_error = true
+			@parent.start() unless @parent.start_time?
 		
-			check_queue.push event.keyCode
+			@parent.check_queue.push event.keyCode

@@ -1,5 +1,6 @@
 (function() {
   var Compete, Practice, Type;
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   Compete = (function() {
     var COUNTDOWN_TIME, add_key_listener, add_player_row, countdown_el, find_room, first_poll, get_player_progress, highlight_leader, init_pollers, poll_server, prepare, room, server_poll, server_started, show_countdown, show_player_update, start, update_player_stats;
     function Compete(parent) {
@@ -131,56 +132,54 @@
     }
     Practice.prototype.prepare = function() {
       window.foo = this.parent;
-      return $.get("/type/copy/" + this.parent.copy_category, null, function(copy) {
+      console.log(this.parent, this.parent.prepare_copy);
+      return $.get("/type/copy/" + this.parent.copy_category, null, __bind(function(copy) {
         var poll, split, stats_poll;
         split = copy['copy']['content'].split(' ');
         this.parent.prepare_copy(split, copy['copy']['note']);
         add_key_listener();
         poll = setInterval(eval_next_in_queue, 30);
         return stats_poll = setInterval(calculate_stats, 500);
-      }, 'json');
+      }, this), 'json');
     };
     Practice.prototype.start = function() {
-      var start_time;
       this.parent.hide_notifications();
-      return start_time = new Date();
+      return this.parent.start_time = new Date();
     };
     Practice.prototype.add_key_listener = function() {
       return type_area.keyup(function(event) {
-        var can_show_error;
-        can_show_error = true;
-        if (typeof start_time == "undefined" || start_time === null) {
+        this.parent.can_show_error = true;
+        if (this.parent.start_time == null) {
           this.parent.start();
         }
-        return check_queue.push(event.keyCode);
+        return this.parent.check_queue.push(event.keyCode);
       });
     };
     return Practice;
   })();
   Type = (function() {
-    var can_show_error, chars_typed, check_queue, copy_category, cur_word, cur_word_idx, end_time, game, is_done, num_words, poll, start_time, stat_cpm, stat_delta, stat_progress, stat_wpm, stats_poll, total_chars, type_area, words, words_typed;
     function Type() {}
-    cur_word_idx = -1;
-    cur_word = '';
-    copy_category = 1;
-    words = null;
-    num_words = 0;
-    check_queue = [];
-    poll = null;
-    stats_poll = null;
-    can_show_error = true;
-    start_time = null;
-    end_time = null;
-    type_area = null;
-    stat_delta = null;
-    stat_wpm = null;
-    stat_cpm = null;
-    stat_progress = null;
-    is_done = false;
-    words_typed = 0;
-    chars_typed = 0;
-    total_chars = 0;
-    game = null;
+    Type.cur_word_idx = -1;
+    Type.cur_word = '';
+    Type.copy_category = 1;
+    Type.words = null;
+    Type.num_words = 0;
+    Type.check_queue = [];
+    Type.poll = null;
+    Type.stats_poll = null;
+    Type.can_show_error = true;
+    Type.start_time = null;
+    Type.end_time = null;
+    Type.type_area = null;
+    Type.stat_delta = null;
+    Type.stat_wpm = null;
+    Type.stat_cpm = null;
+    Type.stat_progress = null;
+    Type.is_done = false;
+    Type.words_typed = 0;
+    Type.chars_typed = 0;
+    Type.total_chars = 0;
+    Type.game = null;
     Type.prototype.prepare_copy = function(words_arr, note) {
       var word, _i, _len;
       for (_i = 0, _len = words_arr.length; _i < _len; _i++) {
@@ -188,70 +187,70 @@
         $('#copy').append("<span class='word'>" + word + "</span>&nbsp;");
       }
       $('#note').text(note);
-      words = $('#copy span.word');
-      num_words = words_arr.length;
-      total_chars = $('#copy').text().length;
-      return next_word();
+      this.words = $('#copy span.word');
+      this.num_words = words_arr.length;
+      this.total_chars = $('#copy').text().length;
+      return this.next_word();
     };
     Type.prototype.hide_notifications = function() {
       return $('.notification').css('visibility', 'hidden');
     };
     Type.prototype.eval_next_in_queue = function() {
       var check, code, typed_text;
-      if (check_queue.length === 0) {
+      if (this.check_queue.length === 0) {
         return;
       }
-      code = check_queue.shift();
-      typed_text = type_area.val().split(' ')[0];
-      check = cur_word.substr(0, typed_text.length);
+      code = this.check_queue.shift();
+      typed_text = this.type_area.val().split(' ')[0];
+      check = this.cur_word.substr(0, typed_text.length);
       if (code === 32) {
         if (typed_text.length === cur_word.length && typed_text === check) {
-          return next_word();
+          return this.next_word();
         } else {
-          return show_error();
+          return this.show_error();
         }
       } else {
         if (typed_text !== check) {
-          return show_error();
+          return this.show_error();
         } else {
-          return chars_typed += 1;
+          return this.chars_typed += 1;
         }
       }
     };
     Type.prototype.next_word = function() {
       var old_word;
-      old_word = cur_word;
-      cur_word_idx += 1;
-      words_typed += 1;
-      chars_typed += 1;
-      if (words[cur_word_idx] != null) {
-        cur_word = words[cur_word_idx].innerHTML;
-        if (words[cur_word_idx - 1] != null) {
-          $(words[cur_word_idx - 1]).removeClass('personal-highlight');
+      old_word = this.cur_word;
+      this.cur_word_idx += 1;
+      this.words_typed += 1;
+      this.chars_typed += 1;
+      if (this.words[this.cur_word_idx] != null) {
+        this.cur_word = words[this.cur_word_idx].innerHTML;
+        if (this.words[this.cur_word_idx - 1] != null) {
+          $(this.words[this.cur_word_idx - 1]).removeClass('personal-highlight');
         }
-        $(words[cur_word_idx]).addClass('personal-highlight');
-        return type_area.val(type_area.val().replace(old_word + ' ', ''));
+        $(this.words[this.cur_word_idx]).addClass('personal-highlight');
+        return this.type_area.val(type_area.val().replace(old_word + ' ', ''));
       } else {
-        return done();
+        return this.done();
       }
     };
     Type.prototype.done = function() {
-      is_done = true;
-      clearInterval(poll);
-      clearInterval(stats_poll);
-      end_time = new Date();
-      type_area.css('background-color', '#6fbf4d');
-      calculate_stats();
-      return submit_results(num_words, stat_delta, stat_wpm, stat_cpm);
+      this.is_done = true;
+      clearInterval(this.poll);
+      clearInterval(this.stats_poll);
+      this.end_time = new Date();
+      this.type_area.css('background-color', '#6fbf4d');
+      this.calculate_stats();
+      return this.submit_results(this.num_words, this.stat_delta, this.stat_wpm, this.stat_cpm);
     };
     Type.prototype.calculate_stats = function() {
-      var compare_time;
-      compare_time = end_time != null ? end_time : new Date();
-      stat_delta = (compare_time.getTime() - start_time.getTime()) / 60000;
-      stat_wpm = Math.round(words_typed / stat_delta);
-      stat_cpm = Math.round(chars_typed / stat_delta);
-      $('#results-wpm').text(stat_wpm);
-      return $('#results-cpm').text(stat_cpm);
+      var compare_time, stat_delta;
+      compare_time = this.end_time != null ? this.end_time : new Date();
+      stat_delta = (compare_time.getTime() - this.start_time.getTime()) / 60000;
+      this.stat_wpm = Math.round(this.words_typed / stat_delta);
+      this.stat_cpm = Math.round(this.chars_typed / stat_delta);
+      $('#results-wpm').text(this.stat_wpm);
+      return $('#results-cpm').text(this.stat_cpm);
     };
     Type.prototype.submit_results = function(words, duration, words_per_minute, characters_per_minute) {
       return $.post('/type/submit', {
@@ -262,19 +261,19 @@
       }, null, 'json');
     };
     Type.prototype.show_error = function() {
-      if (can_show_error) {
-        type_area.css('background-color', '#ff7878');
+      if (this.can_show_error) {
+        this.type_area.css('background-color', '#ff7878');
         setTimeout(hide_error, 500);
       }
-      return can_show_error = false;
+      return this.can_show_error = false;
     };
     Type.prototype.hide_error = function() {
-      return type_area.css('background-color', '#fafafa');
+      return this.type_area.css('background-color', '#fafafa');
     };
     Type.prototype.ready = function() {
-      type_area = $('#type_area');
-      game = game_type === 'compete' ? new Compete(this) : game_type === 'practice' ? new Practice(this) : void 0;
-      return game.prepare();
+      this.type_area = $('#type_area');
+      this.game = game_type === 'compete' ? new Compete(this) : game_type === 'practice' ? new Practice(this) : void 0;
+      return this.game.prepare();
     };
     return Type;
   })();
