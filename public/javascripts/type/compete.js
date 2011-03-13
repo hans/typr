@@ -28,22 +28,23 @@ function find_room() {
 		// set the global room object, and make sure its ID is an int
 		// (for use in the countdown)
 		room = _room;
-		room.id = parseInt(room.id)
+		room[0] = parseInt(room[0])
 		
-		$.each(room.players, function(idx, player) {
+		$.each(room[1], function(idx, player) {
 			add_player_row(idx, player)
 			show_player_update(idx, player)
 		})
 		
-		prepare_copy(room['copy'][0].split(' '), room['copy'][1])
+		prepare_copy(room[2][0].split(' '), room[2][1])
 		init_pollers()
 	}, 'json')
 }
 
 function start() {
-	$.get('/type/compete/room/' + room.id + '/start', null, function(data) {
+	$.get('/type/compete/room/' + room[0] + '/start', null, function(data) {
 		hide_notifications()
 		start_time = new Date()
+		stats_poll = setInterval(calculate_stats, 500)
 		
 		type_area.removeAttr('disabled').focus()
 		add_key_listener()
@@ -53,14 +54,14 @@ function start() {
 // process stats received from the server
 function update_player_stats(players) {
 	$.each(players, function(idx, player) {
-		if ( room.players[idx] == undefined ) {
-			room.players[idx] = player
+		if ( room[1][idx] == undefined ) {
+			room[1][idx] = player
 			add_player_row(idx, player)
 		} else {
-			room.players[idx].wpm = player.wpm
-			room.players[idx].cpm = player.cpm
-			room.players[idx].cur_word_idx = player.cur_word_idx
-			room.players[idx].done = player.done
+			room[1][idx].wpm = player.wpm
+			room[1][idx].cpm = player.cpm
+			room[1][idx].cur_word_idx = player.cur_word_idx
+			room[1][idx].done = player.done
 		}
 		
 		show_player_update(idx, player)
@@ -90,31 +91,30 @@ function show_countdown(time_left) {
 }
 
 function highlight_leader() {
-	sorted_players = $.keys(room.players)
+	sorted_players = $.keys(room[1])
 	sorted_players = sorted_players.sort(function(a, b) {
-		return room.players[b].cur_word_idx - room.players[a].cur_word_idx
+		return room[1][b].cur_word_idx - room[1][a].cur_word_idx
 	})
 	
 	// highlight the leader in red.
 	// if the current user is the leader, highlight the user in second place
 	if ( sorted_players[0].id == player_id && sorted_players[1] != undefined ) {
 		words.removeClass('leader-highlight')
-		$(words[room.players[sorted_players[1]].cur_word_idx]).addClass('leader-highlight')
+		$(words[room[1][sorted_players[1]].cur_word_idx]).addClass('leader-highlight')
 	} else {
 		words.removeClass('leader-highlight')
-		$(words[room.players[sorted_players[0]].cur_word_idx]).addClass('leader-highlight')
+		$(words[room[1][sorted_players[0]].cur_word_idx]).addClass('leader-highlight')
 	}
 }
 
 function init_pollers() {
 	server_poll = setInterval(poll_server, 2000)
 	poll = setInterval(eval_next_in_queue, 30)
-	stats_poll = setInterval(calculate_stats, 500)
 }
 
 function poll_server() {
 	if ( start_time == null ) {
-		var time_before_start = room.id + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
+		var time_before_start = room[0] + COUNTDOWN_TIME - ( new Date().getTime() / 1000 )
 		show_countdown(Math.round(time_before_start))
 		
 		if ( !server_started && time_before_start < 0 ) {
@@ -133,7 +133,7 @@ function poll_server() {
 		return
 	}
 	
-	url = '/type/compete/room/' + room['id'] + '/' + player_id
+	url = '/type/compete/room/' + room[0] + '/' + player_id
 	$.post(url, {
 		player_id: player_id,
 		player_name: player_name,
@@ -142,7 +142,7 @@ function poll_server() {
 		cur_word_idx: cur_word_idx,
 		done: is_done
 	}, function(data) {
-		update_player_stats(data.players)
+		update_player_stats(data[1])
 		highlight_leader()
 	}, 'json')
 }

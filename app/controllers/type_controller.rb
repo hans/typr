@@ -27,17 +27,17 @@ class TypeController < ApplicationController
     # add the user to the retrieved room
     REDIS.hset "rooms:id:#{room_id}", current_user.id, current_user.username + ":0:0:0:false"
     
-    render :json => {
-      'id' => room_id,
-      'copy' => [room_copy.content, room_copy.note],
-      'players' => get_players(room_id)
-    }
+    render :json => [
+      room_id,
+      get_players(room_id),
+      [room_copy.content, room_copy.note]
+    ]
   end
   
   respond_to :json
   def room_status
     room_id = params[:id]
-    render :json => {'id' => room_id, 'players' => get_players(room_id)}
+    render :json => [room_id, get_players(room_id)]
   end
   
   respond_to :json
@@ -45,7 +45,7 @@ class TypeController < ApplicationController
     data_str = [params[:player_name], params[:wpm], params[:cpm], params[:cur_word_idx], params[:done]].join ':'
     REDIS.hset "rooms:id:#{params[:room_id]}", params[:player_id], data_str
     
-    render :json => {'id' => params[:room_id], 'players' => get_players(params[:room_id])}
+    render :json => [params[:room_id], get_players(params[:room_id])]
   end
   
   respond_to :json
