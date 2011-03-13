@@ -48,7 +48,7 @@ class Type
 	# store Game class
 	game = null
 
-	prepare_copy = (words_arr, note) ->
+	prepare_copy: (words_arr, note) ->
 		$('#copy').append("<span class='word'>#{word}</span>&nbsp;") for word in words_arr
 	
 		$('#note').text(note)
@@ -59,10 +59,10 @@ class Type
 	
 		next_word()
 
-	hide_notifications = ->
+	hide_notifications: ->
 		$('.notification').css 'visibility', 'hidden'
 
-	eval_next_in_queue = ->
+	eval_next_in_queue: ->
 		return if check_queue.length == 0
 	
 		code = check_queue.shift()
@@ -80,7 +80,7 @@ class Type
 			else
 				chars_typed += 1
 
-	next_word = ->
+	next_word: ->
 		old_word = cur_word
 		cur_word_idx += 1
 	
@@ -106,7 +106,7 @@ class Type
 		else
 			done()
 
-	done = ->
+	done: ->
 		is_done = true
 	
 		clearInterval poll
@@ -118,7 +118,7 @@ class Type
 		calculate_stats()
 		submit_results num_words, stat_delta, stat_wpm, stat_cpm
 
-	calculate_stats = ->
+	calculate_stats: ->
 		compare_time = if end_time? then end_time else new Date()
 		stat_delta = ( compare_time.getTime() - start_time.getTime() ) / 60000
 	
@@ -128,7 +128,7 @@ class Type
 		$('#results-wpm').text stat_wpm
 		$('#results-cpm').text stat_cpm
 
-	submit_results = (words, duration, words_per_minute, characters_per_minute) ->
+	submit_results: (words, duration, words_per_minute, characters_per_minute) ->
 		$.post('/type/submit',
 			words: words
 			duration: stat_delta
@@ -136,19 +136,25 @@ class Type
 			cpm: characters_per_minute
 		, null, 'json')
 
-	show_error = ->
+	show_error: ->
 		if can_show_error
 			type_area.css 'background-color', '#ff7878'
 			setTimeout hide_error, 500
 	
 		can_show_error = false
 
-	hide_error = ->
+	hide_error: ->
 		type_area.css 'background-color', '#fafafa'
-
-	$(document).ready ->
+	
+	ready: ->
 		type_area = $('#type_area')
+
+		game = if game_type is 'compete'
+			new Compete(this)
+		else if game_type is 'practice'
+			new Practice(this)
 		
-		game = new Game()
-		game.parent = this
 		game.prepare()
+
+$(document).ready ->
+	new Type().ready()

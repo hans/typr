@@ -5,7 +5,7 @@ class TypeController < ApplicationController
   
   def compete
     redirect_to "/profiles/choose/compete" if session[:profile_id].nil?
-    @page_scripts = ['jquery-ui.min', 'type/compete', 'type']
+    @page_scripts = ['jquery-ui.min', 'type']
     @page_styles = ['jquery-ui']
   end
   
@@ -59,7 +59,7 @@ class TypeController < ApplicationController
   
   def practice
     redirect_to "/profiles/choose/practice" if session[:profile_id].nil?
-    @page_scripts = ['type/practice', 'type']
+    @page_scripts = ['type']
   end
   
   respond_to :json

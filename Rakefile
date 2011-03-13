@@ -25,16 +25,9 @@ task :coffee do
         files_to_compile << path
       end
     end
-  end
-  
-  files_to_compile.each do |fname|
-    js_fname = fname.gsub /\.coffee$/, '.js'
-    coffee_script_code = File.open(fname, 'r') { |coffee_script_file| coffee_script_file.read }
     
-    print "\n#{fname}"
-    File.open js_fname, 'w' do |js_file|
-      js_file.puts CoffeeScript.compile(coffee_script_code)
-      print " done"
+    File.open 'type.js', 'w' do |js|
+      js.write `coffee -pj #{files_to_compile.join(' ')}`
     end
   end
 end

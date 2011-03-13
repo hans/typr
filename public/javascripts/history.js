@@ -1,10 +1,5 @@
-(function() {
-  ({
-    render_chart: function(container, series) {
-      var chart;
-      options.series = series;
-      options.chart.renderTo = container;
-      return chart = new Highcharts.Chart(options);
-    }
-  });
-}).call(this);
+function render_chart(container, series) {
+	options.series = series
+	options.chart.renderTo = container;
+	chart = new Highcharts.Chart(options)
+}

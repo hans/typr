@@ -1,4 +1,6 @@
-class Game
+class Compete
+	constructor: (@parent) ->
+	
 	# length of the countdown, in seconds
 	COUNTDOWN_TIME = 15
 	countdown_el = null
